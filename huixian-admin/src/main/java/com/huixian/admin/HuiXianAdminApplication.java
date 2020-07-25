@@ -3,9 +3,14 @@ package com.huixian.admin;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
 
 @SpringBootApplication
-@MapperScan("com.huixian.system.mapper") //配置Mapper扫描的地址
+//配置Mapper扫描的地址
+@MapperScan("com.huixian.system.mapper")
+//配置扫描包的地址！重点！！！
+@ComponentScan(basePackages = "com.huixian")
 public class HuiXianAdminApplication {
 
     public static void main(String[] args) {

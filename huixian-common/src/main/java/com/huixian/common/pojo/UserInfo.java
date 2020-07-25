@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * Users表实体类
  * @author JUNSHI 405773808@qq.com
@@ -12,7 +14,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Users {
+public class UserInfo implements Serializable {
+
+    private static final long serialVersionUID = 219948L;
 
     /** id无意义 */
     private String id;

@@ -2,8 +2,8 @@ package com.huixian.admin;
 
 
 
-import com.huixian.admin.HuiXianAdminApplication;
-import com.huixian.system.mapper.UsersMapper;
+import com.huixian.system.mapper.UserInfoMapper;
+import com.huixian.system.service.UserInfoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,12 +19,14 @@ public class HuiXianAdminApplicationTests {
     private DataSource dataSource;
 
     @Autowired
-    private UsersMapper usersMapper;
+    private UserInfoMapper userInfoMapper;
+
+    @Autowired
+    private UserInfoService userInfoService;
 
     @Test
     void contextLoads() throws SQLException {
-        System.out.println(usersMapper.findAllUsers());
-        System.out.println(usersMapper.findUserById("F7F6D2AECE3211EAB12A00163E0E371C"));
+        System.out.println(userInfoService.findAllUsers());
 
     }
 

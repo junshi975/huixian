@@ -1,12 +1,15 @@
 package com.huixian.admin.controller;
 
-import com.huixian.common.pojo.Person;
+import com.huixian.common.pojo.Result;
+import com.huixian.common.pojo.UserInfo;
+import com.huixian.system.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author JUNSHI 405773808@qq.com
@@ -17,12 +20,11 @@ public class HelloController {
 
 
     @Autowired
-    DataSource dataSource;
+    private UserInfoService userInfoService;
 
-    @GetMapping("/hello")
-    public Person hello() throws SQLException {
-        System.out.println(dataSource.getConnection());
-        Person person = new Person(1);
-        return person;
+    @GetMapping("/get")
+    public Result get() throws SQLException {
+        List<UserInfo> allUsers = userInfoService.findAllUsers();
+        return Result.success(allUsers);
     }
 }

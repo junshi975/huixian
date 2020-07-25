@@ -1,11 +1,13 @@
 package com.huixian.common.pojo;
 
+
+
 /**
  * @author JUNSHI 405773808@qq.com
  * @create 2020-07-24 19:29
  */
-
 public class Person {
+
 
     private Integer id;
 

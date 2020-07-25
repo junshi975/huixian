@@ -19,12 +19,24 @@
 
 
     <dependencies>
-
+        <!-- spring-boot-devtools -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+            <!-- 表示依赖不会传递 -->
+        </dependency>
 
         <!--系统模块-->
         <dependency>
             <groupId>com.huixian</groupId>
             <artifactId>huixian-system</artifactId>
+            <version>1.0.0.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.huixian</groupId>
+            <artifactId>huixian-common</artifactId>
             <version>1.0.0.RELEASE</version>
         </dependency>
 
@@ -49,12 +61,21 @@
     </dependencies>
 
 
-
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
