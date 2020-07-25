@@ -21,16 +21,19 @@
     <dependencies>
 
 
-
-
-
+        <!--系统模块-->
         <dependency>
             <groupId>com.huixian</groupId>
-            <artifactId>huixian-common</artifactId>
+            <artifactId>huixian-system</artifactId>
             <version>1.0.0.RELEASE</version>
-            <scope>compile</scope>
         </dependency>
 
+        <!--框架模块-->
+        <dependency>
+            <groupId>com.huixian</groupId>
+            <artifactId>huixian-center</artifactId>
+            <version>1.0.0.RELEASE</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -42,16 +45,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.3.1.RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
+
     </dependencies>
 
 
@@ -70,6 +64,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>huixian</finalName>
     </build>
 
 </project>

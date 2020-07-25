@@ -34,8 +34,6 @@
         <module>huixian-center</module>
         <!--通用模块-->
         <module>huixian-common</module>
-        <!--代码生成模块-->
-        <module>huixian-generator</module>
         <!--系统模块-->
         <module>huixian-system</module>
     </modules>
@@ -56,8 +54,6 @@
         <swagger.version>2.9.2</swagger.version>
 
     </properties>
-
-    <dependencyManagement>
 
         <dependencies>
 
@@ -93,11 +89,11 @@
             </dependency>
 
 
-            <dependency>
+      <!--      <dependency>
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${pagehelper.boot.version}</version>
-            </dependency>
+            </dependency>-->
 
             <!-- swagger2-->
             <dependency>
@@ -139,6 +135,5 @@
             </dependency>
 
         </dependencies>
-    </dependencyManagement>
 
 </project>

@@ -1,0 +1,54 @@
+#处理jackson 空值不显示
+spring:
+  jackson:
+    default-property-inclusion: non_null
+
+# 配置数据源
+  datasource:
+    # druid数据库连接池
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: KpuuqswlqD#7vu^W@FVANg^OxsX1Ry
+    url: jdbc:mysql://codewhite.cn:3306/huixian?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # druid设置
+    # 初始连接数
+    initialSize: 5
+    # 最小连接池数量
+    minIdle: 5
+    # 最大连接池数量
+    maxActive: 20
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    # 配置检测连接是否有效
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    #  filters: stat,wall,log4j 需要导入log4j
+    filter: stat,wall
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+mybatis:
+  # 指定配置文件的地址
+  # config-location: classpath:mybatis/mybatis-config.xml
+  #指定sql映射文件的位置
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.huixian.common.pojo  # 注意：对应实体类的路径
+  configuration: # 驼峰命名需要
+    map-underscore-to-camel-case: true    # 驼峰命名开启
+
+#pagehelper分页插件
+#pagehelper:
+#  helperDialect: mysql
+#  reasonable: true
+#  supportMethodsArguments: true
+#  params: count=countSql

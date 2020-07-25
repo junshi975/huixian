@@ -15,10 +15,17 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <huixian.version>1.0.0.RELEASE</huixian.version>
     </properties>
 
     <dependencies>
 
+        <!--通用模块-->
+        <dependency>
+            <groupId>com.huixian</groupId>
+            <artifactId>huixian-common</artifactId>
+            <version>${huixian.version}</version>
+        </dependency>
 
     </dependencies>
 
