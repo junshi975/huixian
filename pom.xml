@@ -52,7 +52,8 @@
         <pagehelper.boot.version>1.2.5</pagehelper.boot.version>
         <!--swagger版本-->
         <swagger.version>2.9.2</swagger.version>
-
+        <!--jsr303参数校验版本-->
+        <jsr303.version>6.1.5.Final</jsr303.version>
     </properties>
 
     <dependencies>
@@ -64,6 +65,7 @@
             <version>${druid.version}</version>
         </dependency>
 
+        <!--Springboot启动器-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -88,7 +90,14 @@
             <version>${mybatis.version}</version>
         </dependency>
 
+        <!--JSR303参数校验-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${jsr303.version}</version>
+        </dependency>
 
+        <!--pagehelper分页插件-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
@@ -119,6 +128,12 @@
             <version>${swagger.version}</version>
         </dependency>
 
+        <!-- 引入swagger-bootstrap-ui包 /doc.html-->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>swagger-bootstrap-ui</artifactId>
+            <version>1.8.1</version>
+        </dependency>
 
         <!--mysql驱动-->
         <dependency>

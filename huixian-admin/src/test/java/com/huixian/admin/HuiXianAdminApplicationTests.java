@@ -2,6 +2,9 @@ package com.huixian.admin;
 
 
 
+import com.huixian.common.utils.DateUtils;
+import com.huixian.common.utils.spring.SpringUtils;
+import com.huixian.common.utils.uuid.IdUtils;
 import com.huixian.system.mapper.UserInfoMapper;
 import com.huixian.system.service.UserInfoService;
 import org.junit.jupiter.api.Test;
@@ -10,24 +13,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.Date;
 
 @SpringBootTest
 public class HuiXianAdminApplicationTests {
 
 
-    @Autowired
-    private DataSource dataSource;
-
-    @Autowired
-    private UserInfoMapper userInfoMapper;
-
-    @Autowired
-    private UserInfoService userInfoService;
 
     @Test
     void contextLoads() throws SQLException {
-        System.out.println(userInfoService.findAllUsers());
-
+        Date date = new Date();
+        String str = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, date);
+        System.out.println(str);
     }
 
 }

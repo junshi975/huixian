@@ -1,6 +1,21 @@
-#配置启动端口
+# 开发环境配置
 server:
-  port: 8080
+  # 服务器的HTTP端口，默认为8080
+  port: 8084
+  tomcat:
+    # tomcat的URI编码
+    uri-encoding: UTF-8
+  servlet:
+    # 应用的访问路径
+    context-path: /huixian
+
+# 日志配置
+logging:
+  level:
+    com.ruoyi: debug
+    org.springframework: warn
+
+
 #处理jackson 空值不显示
 spring:
   jackson:
@@ -39,6 +54,7 @@ spring:
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 
+## Mybatis配置
 mybatis:
   # 指定配置文件的地址
   # config-location: classpath:mybatis/mybatis-config.xml
