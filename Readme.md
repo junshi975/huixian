@@ -68,29 +68,32 @@ API文档：http://www.codewhite.cn/huixian/doc.html
 
 ## 功能模块
 
-![惠闲二手交易平台（后台）](惠闲二手交易平台（后台）.png)
+![惠闲二手交易平台（后台）](https://codewhite.cn/img/惠闲二手交易平台（后台）.png)
 
 ## 技术架构
 
-![image-20200724133600609](C:\Users\JUN\AppData\Roaming\Typora\typora-user-images\image-20200724133600609.png)
+![image-20200724133600609](https://codewhite.cn/img/技术架构.png)
 
 ## 前台页面
 
-![image-20200724135648106](前台页面.png)
+![image-20200724135648106](https://codewhite.cn/img/前台页面.png)
 
 ## 后台页面
 
-![后台页面 (1)](后台页面 .png)
+![后台页面 (1)](https://codewhite.cn/img/%E5%90%8E%E5%8F%B0%E9%A1%B5%E9%9D%A2%20.png)
 
 ## 文件目录
 
 ```properties
 com.huixian 
-├── admin			   // 管理员模块
-├── common             // 工具类
-│      
-├── framework          // 框架核心
-│       └── web                           // 前端控制
-├── system             // 系统模块
+├── admin                                // 管理员模块
+│       └── controller   //控制器
+├── common                               // 工具类
+│       └── web  
+├── center                               // 框架核心
+│       └── config     //配置信息
+├── system                               // 系统模块
+│        └── mapper     //mapper类                         
+│        └── service    //服务模块 
 ```
 
