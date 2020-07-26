@@ -11,11 +11,11 @@ public enum ResultCode {
     /**
      * 成功状态码
      */
-    SUCCESS(100, "处理成功！"),
+    SUCCESS(200, "处理成功！"),
     /**
      * 失败状态码
      */
-    ERROR(200, "处理失败！"),
+    ERROR(100, "处理失败！"),
     /* 参数错误 1000-1999 */
     /**
      * 参数无效
@@ -54,7 +54,7 @@ public enum ResultCode {
     /**
      * 账号已经被禁用
      */
-    USER_ACCOUNT_DISABLE(2004, "账号已经被禁用！");
+    USER_ACCOUNT_DISABLE(2005, "账号已经被禁用！");
 
 
     /**

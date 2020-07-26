@@ -1,15 +1,17 @@
 package com.huixian.common.pojo;
 
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 统一返回结果类
  * @author JUNSHI 405773808@qq.com
  * @create 2020-07-17 20:08
  */
+@ApiModel(value = "统一返回结果")
 public class Result<T> implements Serializable {
 
     /**
@@ -20,21 +22,20 @@ public class Result<T> implements Serializable {
     /**
      * 状态码
      */
+    @ApiModelProperty("状态码")
     private Integer code;
     /**
      * 提示信息
      */
+    @ApiModelProperty("提示信息")
     private String message;
 
     /**
      * 返回数据
      */
+    @ApiModelProperty("返回的数据")
     private T data;
 
-    /**
-     * 返回的数据
-     */
-    private Map<String, Object> result;
 
 
     /**
@@ -92,17 +93,7 @@ public class Result<T> implements Serializable {
         return new Result<>(ResultCode.ERROR, data);
     }
 
-    /**
-     * 添加一条结果数据
-     * @param key
-     * @param value
-     * @return
-     */
-    public Result<T> add(String key, Object value) {
-        this.result = new HashMap<>();
-        this.result.put(key, value);
-        return this;
-    }
+
 
     public Integer getCode() {
         return code;
@@ -128,13 +119,7 @@ public class Result<T> implements Serializable {
         this.data = data;
     }
 
-    public Map<String, Object> getResult() {
-        return result;
-    }
 
-    public void setResult(Map<String, Object> result) {
-        this.result = result;
-    }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;

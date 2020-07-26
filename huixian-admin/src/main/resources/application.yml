@@ -71,5 +71,7 @@ mybatis:
 #  supportMethodsArguments: true
 #  params: count=countSql
 
-
+# swagger配置
+swagger:
+  enabled: true
 
