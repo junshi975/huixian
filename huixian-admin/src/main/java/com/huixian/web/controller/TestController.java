@@ -1,18 +1,13 @@
-package com.huixian.admin.controller;
+package com.huixian.web.controller;
 
 import com.huixian.common.pojo.Result;
 import com.huixian.common.pojo.ResultCode;
-import com.huixian.common.pojo.UserInfo;
 import com.huixian.system.service.UserInfoService;
 import io.swagger.annotations.*;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.swagger.readers.parameter.Examples;
 
-import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.List;
 
 import static com.huixian.common.pojo.Result.success;
 

@@ -87,11 +87,16 @@ API文档：http://www.codewhite.cn/huixian/doc.html
 ```properties
 com.huixian 
 ├── admin                                // 管理员模块
-│       └── controller   //控制器
-├── common                               // 工具类
-│       └── web  
+│       └── controller   //接口
+│       └── config       //swagger配置
 ├── center                               // 框架核心
-│       └── config     //配置信息
+│       └── config      //配置信息
+│       └── aspectj     //AOP切面
+├── common                               // 工具类
+│       └── core        //核心工具
+│       └── exception   //通用异常
+│       └── pojo        //数据库实体Bean
+│       └── utils   	//工具类包
 ├── system                               // 系统模块
 │        └── mapper     //mapper类                         
 │        └── service    //服务模块 
