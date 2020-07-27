@@ -1,7 +1,9 @@
 package com.huixian.web;
 
 
+import com.huixian.common.config.HuiXianConfig;
 import com.huixian.common.pojo.UserInfo;
+import com.huixian.common.utils.file.FileUtils;
 import com.huixian.system.mapper.UserInfoMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +63,9 @@ public class HuiXianAdminApplicationTests {
 
     @Test
     public void testMapper() {
-        System.out.println(userInfoMapper.findUserByStuIdAndPassWord(new UserInfo(null, null, "admin", null, "0", null, null, null, null, null)));
+        //System.out.println(userInfoMapper.findUserByStuIdAndPassWord(new UserInfo(null, null, "admin", null, "0", null, null, null, null, null)));
+        //System.out.println(FileUtils.fileExists("C:\\Users\\JUN\\Desktop\\惠闲交易系统\\io\\1595838905573.jpg"));
+        System.out.println(HuiXianConfig.getPhoto());
     }
 
 }

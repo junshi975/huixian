@@ -28,14 +28,14 @@ public class HuiXianConfig {
     private String copyrightYear;
 
     /**
-     * 实例演示开关
-     */
-    private boolean demoEnabled;
-
-    /**
      * 上传路径
      */
     private static String profile;
+
+    /**
+     * 头像路径
+     */
+    private static String photo;
 
     /**
      * 获取地址开关
@@ -66,13 +66,6 @@ public class HuiXianConfig {
         this.copyrightYear = copyrightYear;
     }
 
-    public boolean isDemoEnabled() {
-        return demoEnabled;
-    }
-
-    public void setDemoEnabled(boolean demoEnabled) {
-        this.demoEnabled = demoEnabled;
-    }
 
     public static String getProfile() {
         return profile;
@@ -88,6 +81,14 @@ public class HuiXianConfig {
 
     public void setAddressEnabled(boolean addressEnabled) {
         HuiXianConfig.addressEnabled = addressEnabled;
+    }
+
+    public static String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        HuiXianConfig.photo = photo;
     }
 
     /**

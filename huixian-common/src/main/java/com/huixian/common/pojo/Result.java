@@ -124,4 +124,13 @@ public class Result<T> implements Serializable {
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "'code:'" + code +
+                ", 'message:'" + message + '\'' +
+                ", 'data:'" + data +
+                '}';
+    }
 }
