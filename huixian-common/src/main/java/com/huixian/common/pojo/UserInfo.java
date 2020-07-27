@@ -36,6 +36,7 @@ public class UserInfo implements Serializable {
     private String grade;
     /** 头像 */
     private String photo = "static/img/default.jpg";
-
+    /** 状态 */
+    private Integer status;
 
 }

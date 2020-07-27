@@ -13,10 +13,7 @@
     <artifactId>huixian-system</artifactId>
     <description>系统模块</description>
 
-    <properties>
-        <java.version>1.8</java.version>
-        <huixian.version>1.0.0.RELEASE</huixian.version>
-    </properties>
+
 
     <dependencies>
 

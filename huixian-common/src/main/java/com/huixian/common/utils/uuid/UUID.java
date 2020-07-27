@@ -1,7 +1,10 @@
 package com.huixian.common.utils.uuid;
 
 
-import com.sun.xml.internal.ws.util.UtilException;
+
+
+
+import com.huixian.common.exception.UtilException;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

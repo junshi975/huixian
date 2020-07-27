@@ -32,14 +32,14 @@ public class TestController {
     }
 
     @ApiOperation("获取用户详细")
-    @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "int", paramType = "path")
+    @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "integer", paramType = "path")
     @DeleteMapping("/{userId}")
     public Result getAgs(@PathVariable Integer userId) {
         return success();
     }
 
     @ApiOperation("获取用户")
-    @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "int", paramType = "path")
+    @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "integer", paramType = "path")
     @PutMapping("/user")
     public Result<UserEntity> getUser(@PathVariable Integer userId) {
         return Result.success(new UserEntity(1, "测试", "密码", "123123"));
@@ -61,7 +61,7 @@ public class TestController {
 
 @ApiModel("用户表JSON字段")
 class UserEntity {
-    @ApiModelProperty(value = "用户ID",required = true)
+    @ApiModelProperty(value = "用户ID",required = true,example = "12345")
     private Integer userId;
 
     @ApiModelProperty(value = "用户名称",required = true)

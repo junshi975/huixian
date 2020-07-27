@@ -4,9 +4,102 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huixian.system.mapper.UserInfoMapper">
 
-    <select id="findUserById" resultType="com.huixian.common.pojo.UserInfo">
-        select * from user_info where id = #{id}
+    <!--查询列-->
+    <sql id="selectColumn">
+       select `id`,`nickname`, `password`, `name`, `stu_id`, `gender`, `phone`, `grade`, `photo`, `status` from user_info
+    </sql>
+
+    <!--查询封装-->
+    <resultMap id="selectMap" type="com.huixian.common.pojo.UserInfo">
+        <id property="id" column="id"/>
+        <result property="nickname" column="nickname"/>
+        <result property="password" column="password"/>
+        <result property="name" column="name"/>
+        <result property="stuId" column="stu_id"/>
+        <result property="gender" column="gender"/>
+        <result property="phone" column="phone"/>
+        <result property="grade" column="grade"/>
+        <result property="photo" column="photo"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <!-- =========================== 查询语句============================== -->
+    <select id="findAllUsers" resultMap="selectMap">
+        <include refid="selectColumn"/>
     </select>
 
+    <select id="findUserById" resultType="com.huixian.common.pojo.UserInfo">
+        <include refid="selectColumn"/>
+        where id = #{id}
+    </select>
+
+    <select id="findUserCount" resultType="integer">
+        select count(id) from user_info
+    </select>
+
+    <select id="findUserByStuIdAndPassWord" parameterType="com.huixian.common.pojo.UserInfo" resultMap="selectMap">
+        <include refid="selectColumn"/>
+        where stu_id = #{stuId} and password = #{password}
+    </select>
+    <!-- =========================== 查询结束============================== -->
+
+
+    <!-- =========================== 插入语句 ============================== -->
+    <insert id="addUser" parameterType="com.huixian.common.pojo.UserInfo">
+        INSERT INTO `user_info` (
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">`id`,</if>
+            <if test="nickname != null and nickname != ''">`nickname`,</if>
+            <if test="password != null and password != ''">`password`,</if>
+            <if test="name != null and name != ''">`name`,</if>
+            <if test="stuId != null and stuId != ''">`stu_id`,</if>
+            <if test="gender != null and gender != ''">`gender`,</if>
+            <if test="phone != null and phone != ''">`phone`,</if>
+            <if test="grade != null and grade != ''">`grade`,</if>
+            <if test="photo != null and photo != ''">`photo`,</if>
+            <if test="status != null and status != ''">`status`</if>
+        </trim>
+        )VALUES (
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">#{id},</if>
+            <if test="nickname != null and nickname != ''">#{nickname},</if>
+            <if test="password != null and password != ''">#{password},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="stuId != null and stuId != ''">#{stuId},</if>
+            <if test="gender != null and gender != ''">#{gender},</if>
+            <if test="phone != null and phone != ''">#{phone},</if>
+            <if test="grade != null and grade != ''">#{grade},</if>
+            <if test="photo != null and photo != ''">#{photo},</if>
+            <if test="status != null and status != ''">#{status}</if>
+        </trim>
+        )
+    </insert>
+    <!-- =========================== 插入结束 ============================== -->
+
+
+    <!-- =========================== 修改语句 ============================== -->
+    <update id="updateUserById" parameterType="com.huixian.common.pojo.UserInfo">
+        UPDATE `user_info`
+        <set>
+            <if test="nickname != null and nickname != ''">`nickname` = #{nickname},</if>
+            <if test="password != null and password != ''">`password` = #{password},</if>
+            <if test="name != null and name != ''">`name` = #{name},</if>
+            <if test="stuId != null and stuId != ''">`stu_id` = #{stuId},</if>
+            <if test="gender != null and gender != ''">`gender` = #{gender},</if>
+            <if test="phone != null and phone != ''">`phone` = #{phone},</if>
+            <if test="grade != null and grade != ''">`grade` = #{grade},</if>
+            <if test="photo != null and photo != ''">`photo`= #{photo},</if>
+            <if test="status != null ">`status` = #{status}</if>
+        </set>
+        where id = #{id}
+    </update>
+    <!-- =========================== 修改结束 ============================== -->
+
+
+    <!-- =========================== 删除语句 ============================== -->
+    <delete id="deleteUserById" parameterType="string">
+        delete from user_info where id = #{id}
+    </delete>
+    <!-- =========================== 删除结束 ============================== -->
 
 </mapper>

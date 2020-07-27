@@ -1,3 +1,18 @@
+# 项目相关配置
+huixian:
+  # 名称
+  name: huixian
+  # 版本
+  version: 1.0.0
+  # 版权年份
+  copyrightYear: 2020
+  # 实例演示开关
+  demoEnabled: true
+  # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
+  profile: F:/huixian/uploadPath
+
+
+
 # 开发环境配置
 server:
   # 服务器的HTTP端口，默认为8080
@@ -8,11 +23,16 @@ server:
   servlet:
     # 应用的访问路径
     context-path: /huixian
+    # 配置编码UTF-8
+    encoding:
+      force: true
+      charset: utf-8
+      enabled: true
 
 # 日志配置
 logging:
   level:
-    com.ruoyi: debug
+    com.huixian: debug
     org.springframework: warn
 
 
@@ -20,6 +40,7 @@ logging:
 spring:
   jackson:
     default-property-inclusion: non_null
+
   # 配置数据源
   datasource:
     # druid数据库连接池

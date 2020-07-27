@@ -12,9 +12,7 @@
     <artifactId>huixian-center</artifactId>
     <description>框架中心</description>
 
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+
 
     <dependencies>
 
@@ -23,13 +21,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
-
-        <!-- SpringBoot 拦截器 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
+            <groupId>com.huixian</groupId>
+            <artifactId>huixian-common</artifactId>
+            <version>${huixian.version}</version>
         </dependency>
+
 
     </dependencies>
 
