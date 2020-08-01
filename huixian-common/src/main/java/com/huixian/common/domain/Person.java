@@ -1,6 +1,7 @@
-package com.huixian.common.pojo;
+package com.huixian.common.domain;
 
 
+import javax.validation.constraints.NotNull;
 
 /**
  * @author JUNSHI 405773808@qq.com
@@ -9,6 +10,7 @@ package com.huixian.common.pojo;
 public class Person {
 
 
+    @NotNull
     private Integer id;
 
     public Person() {

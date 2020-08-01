@@ -10,7 +10,7 @@
     </sql>
 
     <!--查询封装-->
-    <resultMap id="selectMap" type="com.huixian.common.pojo.UserInfo">
+    <resultMap id="selectMap" type="com.huixian.common.domain.UserInfo">
         <id property="id" column="id"/>
         <result property="nickname" column="nickname"/>
         <result property="password" column="password"/>
@@ -28,7 +28,7 @@
         <include refid="selectColumn"/>
     </select>
 
-    <select id="findUserById" resultType="com.huixian.common.pojo.UserInfo">
+    <select id="findUserById" resultType="com.huixian.common.domain.UserInfo">
         <include refid="selectColumn"/>
         where id = #{id}
     </select>
@@ -37,7 +37,7 @@
         select count(id) from user_info
     </select>
 
-    <select id="findUserByStuIdAndPassWord" parameterType="com.huixian.common.pojo.UserInfo" resultMap="selectMap">
+    <select id="findUserByStuIdAndPassWord" parameterType="com.huixian.common.domain.UserInfo" resultMap="selectMap">
         <include refid="selectColumn"/>
         where stu_id = #{stuId} and password = #{password}
     </select>
@@ -45,7 +45,7 @@
 
 
     <!-- =========================== 插入语句 ============================== -->
-    <insert id="addUser" parameterType="com.huixian.common.pojo.UserInfo">
+    <insert id="addUser" parameterType="com.huixian.common.domain.UserInfo">
         INSERT INTO `user_info` (
         <trim suffixOverrides=",">
             <if test="id != null and id != ''">`id`,</if>
@@ -78,7 +78,7 @@
 
 
     <!-- =========================== 修改语句 ============================== -->
-    <update id="updateUserById" parameterType="com.huixian.common.pojo.UserInfo">
+    <update id="updateUserById" parameterType="com.huixian.common.domain.UserInfo">
         UPDATE `user_info`
         <set>
             <if test="nickname != null and nickname != ''">`nickname` = #{nickname},</if>

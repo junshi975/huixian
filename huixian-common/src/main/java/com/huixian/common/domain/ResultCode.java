@@ -1,4 +1,4 @@
-package com.huixian.common.pojo;
+package com.huixian.common.domain;
 
 
 /**

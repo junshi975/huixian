@@ -1,6 +1,6 @@
 package com.huixian.system.service.impl;
 
-import com.huixian.common.pojo.UserInfo;
+import com.huixian.common.domain.UserInfo;
 import com.huixian.system.mapper.UserInfoMapper;
 import com.huixian.system.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +21,16 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public List<UserInfo> findAllUsers() {
         return userInfoMapper.findAllUsers();
+    }
+
+    @Override
+    public boolean login(String stuId,String password) {
+
+        if (userInfoMapper.findUserByStuIdAndPassWord(stuId,password) == null) {
+            return false;
+
+        }else {
+            return true;
+        }
     }
 }

@@ -5,6 +5,7 @@ import com.huixian.common.exception.FileException;
 import com.huixian.common.utils.StringUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -16,18 +17,21 @@ import java.io.*;
  */
 public class FileUploadUtils {
 
+
     /**
-     * 头像文件下载
-     * @param fileName 文件名
+     * 文件下载
+     * @param storagePath 存储路径（例：/opt/data/）
+     * @param fileName 文件名称
      * @return 下载成功返回true，失败返回false
-     * @throws Exception
+     * @throws FileException
+     * @throws UnsupportedEncodingException
      */
-    public static boolean downloadPhoto(String fileName, HttpServletResponse response, HttpServletRequest request) throws Exception {
+    public static boolean download(String storagePath, String fileName, HttpServletResponse response, HttpServletRequest request) throws FileException, UnsupportedEncodingException {
 
         //如果文件不存在
-        if (!FileUtils.fileExists(HuiXianConfig.getPhoto() + fileName)) {
+        if (!FileUtils.fileExists(storagePath + fileName)) {
             //结束方法
-            throw new RuntimeException("文件不存在！");
+            throw new FileException("文件不存在！");
         }
 
         //编码化后的文件名
@@ -80,17 +84,17 @@ public class FileUploadUtils {
     }
 
     /**
-     * 文件下载
+     * 文件下载（默认下载springboot配置下的）
      * @param fileName 文件名
      * @return 下载成功返回true，失败返回false
      * @throws Exception
      */
-    public static boolean downloadFile(String fileName, HttpServletResponse response, HttpServletRequest request) throws Exception {
+    public static boolean download(String fileName, HttpServletResponse response, HttpServletRequest request) throws FileException, UnsupportedEncodingException {
 
         //如果文件不存在
         if (!FileUtils.fileExists(HuiXianConfig.getProfile() + fileName)) {
             //结束方法
-            throw new RuntimeException("文件不存在！");
+            throw new FileException("文件不存在！");
         }
 
         //编码化后的文件名
@@ -146,9 +150,12 @@ public class FileUploadUtils {
     /**
      * 文件上传工具
      * @param fileResources 上传过来的文件资源
+     * @param filePath      文件路径
      * @return 上传成功返回文件地址，上传失败返回null
+     * @throws FileException 文件异常类
      */
     public static String fileUpload(MultipartFile fileResources, String filePath) throws FileException {
+
         if (!fileResources.isEmpty()) {
 
             if (fileResources.getSize() == FileUtils.FILE_SIZE_0M) {
@@ -174,7 +181,7 @@ public class FileUploadUtils {
             try {
                 fileResources.transferTo(new File(file, filename));
             } catch (IOException e) {
-                throw new RuntimeException("文件:" + fileResources.getOriginalFilename() + "上传失败,错误信息:" + e);
+                throw new FileException("文件:" + fileResources.getOriginalFilename() + "上传失败,错误信息:" + e);
             }
 
             //返回文件路径:如果上传成功。
@@ -188,49 +195,16 @@ public class FileUploadUtils {
     }
 
     /**
-     * 文件上传工具
-     * @param fileResources 上传过来的文件资源
+     * 文件上传工具(文件路径)
      * @return 上传成功返回文件地址，上传失败返回null
      */
     public static String fileUpload(MultipartFile fileResources) throws FileException {
-
-        if (!fileResources.isEmpty()) {
-
-            if (fileResources.getSize() == FileUtils.FILE_SIZE_0M) {
-                throw new FileException("上传失败：文件为空");
-            }
-            if (fileResources.getSize() > FileUtils.FILE_SIZE_10M) {
-                throw new FileException("上传失败：文件大小不能超过10M");
-            }
-            //创建File对象，一会向该路径下上传文件
-            File file = new File(HuiXianConfig.getProfile());
-
-            // 判断路径是否存在，如果不存在，创建该路径
-            if (!file.exists()) {
-                file.mkdir();
-            }
-            String originalFilename = fileResources.getOriginalFilename();
-
-            // 设置文件名：数字加后缀
-            String filename = FileUtils.FILENAME_MATH_HAVE_POINT + FileUploadUtils.getExtension(fileResources);
-
-            // 完成文件上传
-            try {
-                fileResources.transferTo(new File(file, filename));
-            } catch (IOException e) {
-                throw new RuntimeException("文件:" + fileResources.getOriginalFilename() + "上传失败,错误信息:" + e);
-            }
-
-            //返回文件路径:如果上传成功。
-            String serverPath = HuiXianConfig.getProfile() + filename;
-            if (serverPath != null) {
-                return serverPath;
-            }
+        String path = fileUpload(fileResources, HuiXianConfig.getProfile());
+        if (path != null) {
+            return path;
         }
-
         return null;
     }
-
 
     /**
      * 获取文件名的后缀

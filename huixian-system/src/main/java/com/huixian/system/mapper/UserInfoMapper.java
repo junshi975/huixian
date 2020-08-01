@@ -1,8 +1,8 @@
 package com.huixian.system.mapper;
 
 
-import com.huixian.common.pojo.UserInfo;
-import org.apache.ibatis.annotations.Select;
+import com.huixian.common.domain.UserInfo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -53,6 +53,6 @@ public interface UserInfoMapper {
     /**
      * 根据学号和密码查询用户
      */
-    UserInfo findUserByStuIdAndPassWord(UserInfo userInfo);
+    UserInfo findUserByStuIdAndPassWord(@Param("stuId") String stuId,@Param("password") String password);
 
 }

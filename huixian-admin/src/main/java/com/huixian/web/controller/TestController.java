@@ -1,27 +1,21 @@
 package com.huixian.web.controller;
 
+import com.huixian.common.config.HuiXianConfig;
 import com.huixian.common.exception.FileException;
-import com.huixian.common.pojo.Result;
-import com.huixian.common.pojo.ResultCode;
+import com.huixian.common.domain.Result;
+import com.huixian.common.domain.ResultCode;
 import com.huixian.common.utils.file.FileUploadUtils;
-import com.huixian.common.utils.file.FileUtils;
-import com.huixian.common.utils.uuid.IdUtils;
 import com.huixian.system.service.UserInfoService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 
-import static com.huixian.common.pojo.Result.success;
+import static com.huixian.common.domain.Result.success;
 
 /**
  * @author JUNSHI 405773808@qq.com
@@ -42,7 +36,7 @@ public class TestController {
 
         String fileName = "中文.txt";
         try {
-           FileUploadUtils.downloadFile(fileName, response, request);
+           FileUploadUtils.download(HuiXianConfig.getPhoto(),fileName, response, request);
             return Result.success("下载成功！").toString();
 
         } catch (Exception e) {
