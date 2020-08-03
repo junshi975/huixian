@@ -41,9 +41,10 @@ public class TestController {
 
         } catch (Exception e) {
             e.printStackTrace();
+            return Result.failure(e.getMessage()).toString();
+
         }
 
-        return Result.failure("下载失败！").toString();
     }
 
 

@@ -93,6 +93,14 @@
         </set>
         where id = #{id}
     </update>
+
+    <update id="updatePassword">
+        UPDATE `user_info`
+        <set>
+            <if test="pwd != null and pwd != ''">`password` = #{pwd},</if>
+        </set>
+        where stu_Id = #{stuId}
+    </update>
     <!-- =========================== 修改结束 ============================== -->
 
 

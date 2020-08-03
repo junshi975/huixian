@@ -19,18 +19,32 @@ public class UserInfoServiceImpl implements UserInfoService {
     private UserInfoMapper userInfoMapper;
 
     @Override
-    public List<UserInfo> findAllUsers() {
+    public List<UserInfo> findAllUsers() throws Exception {
         return userInfoMapper.findAllUsers();
     }
 
     @Override
-    public boolean login(String stuId,String password) {
+    public boolean login(String stuId, String password) throws Exception {
 
-        if (userInfoMapper.findUserByStuIdAndPassWord(stuId,password) == null) {
+        if (userInfoMapper.findUserByStuIdAndPassWord(stuId, password) == null) {
             return false;
 
-        }else {
+        } else {
             return true;
         }
+    }
+
+    @Override
+    public boolean updatePwd(String stuId, String pwd, String newPwd) throws Exception {
+        //根据账号密码查询用户
+        UserInfo user = userInfoMapper.findUserByStuIdAndPassWord(stuId, pwd);
+        //如果不为空，那么原密码正确
+        if (user != null) {
+            //开始修改
+            userInfoMapper.updatePassword(stuId, newPwd);
+            //修改成功后返回true
+            return true;
+        }
+        return false;
     }
 }
