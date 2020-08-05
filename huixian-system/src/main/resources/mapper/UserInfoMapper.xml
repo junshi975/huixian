@@ -6,7 +6,12 @@
 
     <!--查询列-->
     <sql id="selectColumn">
-       select `id`,`nickname`, `password`, `name`, `stu_id`, `gender`, `phone`, `grade`, `photo`, `status` from user_info
+       select `id`,`nickname`, `password`, `name`, `stu_id`, `gender`, `phone`, `grade`, `file_id`, `status` from user_info
+    </sql>
+
+    <!--查询列-->
+    <sql id="avatarColumn">
+       select file_id,file_name,file_path,src_path from user_photo
     </sql>
 
     <!--查询封装-->
@@ -19,8 +24,9 @@
         <result property="gender" column="gender"/>
         <result property="phone" column="phone"/>
         <result property="grade" column="grade"/>
-        <result property="photo" column="photo"/>
+        <result property="fileId" column="file_id"/>
         <result property="status" column="status"/>
+        <association property="avatar" select="com.huixian.system.mapper.AvatarMapper.findAvatarById" column="file_id"/>
     </resultMap>
 
     <!-- =========================== 查询语句============================== -->
@@ -28,9 +34,14 @@
         <include refid="selectColumn"/>
     </select>
 
-    <select id="findUserById" resultType="com.huixian.common.domain.UserInfo">
+    <select id="findUserById" resultMap="selectMap">
         <include refid="selectColumn"/>
         where id = #{id}
+    </select>
+
+    <select id="findUserByStuId" resultMap="selectMap">
+        <include refid="selectColumn"/>
+        where stu_id = #{stuId}
     </select>
 
     <select id="findUserCount" resultType="integer">
@@ -40,6 +51,11 @@
     <select id="findUserByStuIdAndPassWord" parameterType="com.huixian.common.domain.UserInfo" resultMap="selectMap">
         <include refid="selectColumn"/>
         where stu_id = #{stuId} and password = #{password}
+    </select>
+
+    <select id="findFileIdByFileName" resultType="java.lang.Integer">
+        <include refid="avatarColumn"/>
+        where file_name = #{fileName}
     </select>
     <!-- =========================== 查询结束============================== -->
 
@@ -56,7 +72,7 @@
             <if test="gender != null and gender != ''">`gender`,</if>
             <if test="phone != null and phone != ''">`phone`,</if>
             <if test="grade != null and grade != ''">`grade`,</if>
-            <if test="photo != null and photo != ''">`photo`,</if>
+            <if test="fileId != null and fileId != ''">`file_id`,</if>
             <if test="status != null and status != ''">`status`</if>
         </trim>
         )VALUES (
@@ -69,8 +85,24 @@
             <if test="gender != null and gender != ''">#{gender},</if>
             <if test="phone != null and phone != ''">#{phone},</if>
             <if test="grade != null and grade != ''">#{grade},</if>
-            <if test="photo != null and photo != ''">#{photo},</if>
+            <if test="fileId != null and fileId != ''">#{fileId},</if>
             <if test="status != null and status != ''">#{status}</if>
+        </trim>
+        )
+    </insert>
+
+    <insert id="upload">
+        INSERT INTO `user_photo` (
+        <trim suffixOverrides=",">
+            <if test="fileName != null and fileName != ''">file_name,</if>
+            <if test="filePath != null and filePath != ''">file_path,</if>
+            <if test="srcPath != null and srcPath != ''">src_path</if>
+        </trim>
+        )VALUES (
+        <trim suffixOverrides=",">
+            <if test="fileName != null and fileName != ''">#{fileName},</if>
+            <if test="filePath != null and filePath != ''">#{filePath},</if>
+            <if test="srcPath != null and srcPath != ''">#{srcPath}</if>
         </trim>
         )
     </insert>
@@ -88,7 +120,7 @@
             <if test="gender != null and gender != ''">`gender` = #{gender},</if>
             <if test="phone != null and phone != ''">`phone` = #{phone},</if>
             <if test="grade != null and grade != ''">`grade` = #{grade},</if>
-            <if test="photo != null and photo != ''">`photo`= #{photo},</if>
+            <if test="fileId != null and fileId != ''">`file_id`= #{fileId},</if>
             <if test="status != null ">`status` = #{status}</if>
         </set>
         where id = #{id}
@@ -101,6 +133,16 @@
         </set>
         where stu_Id = #{stuId}
     </update>
+
+    <update id="updateAvatar">
+        UPDATE `user_info`
+        <set>
+            <if test="fileId != null and fileId != ''">`file_id` = #{fileId},</if>
+        </set>
+        where stu_Id = #{stuId}
+    </update>
+
+
     <!-- =========================== 修改结束 ============================== -->
 
 

@@ -151,7 +151,7 @@ public class FileUploadUtils {
      * 文件上传工具
      * @param fileResources 上传过来的文件资源
      * @param filePath      文件路径
-     * @return 上传成功返回文件地址，上传失败返回null
+     * @return 上传成功返回文件名，上传失败返回null
      * @throws FileException 文件异常类
      */
     public static String fileUpload(MultipartFile fileResources, String filePath) throws FileException {
@@ -187,7 +187,7 @@ public class FileUploadUtils {
             //返回文件路径:如果上传成功。
             String serverPath = filePath + filename;
             if (serverPath != null) {
-                return serverPath;
+                return filename;
             }
         }
 
@@ -196,7 +196,7 @@ public class FileUploadUtils {
 
     /**
      * 文件上传工具(文件路径)
-     * @return 上传成功返回文件地址，上传失败返回null
+     * @return 上传成功返回文件名，上传失败返回null
      */
     public static String fileUpload(MultipartFile fileResources) throws FileException {
         String path = fileUpload(fileResources, HuiXianConfig.getProfile());

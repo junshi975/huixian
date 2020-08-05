@@ -27,6 +27,13 @@ public interface UserInfoMapper {
     UserInfo findUserById(String id) throws Exception;
 
     /**
+     * 根据学号查询用户
+     * @param stuId 学号
+     * @return 返回用户信息
+     */
+    UserInfo findUserByStuId(String stuId) throws Exception;
+
+    /**
      * 添加用户
      * @param userInfo
      */
@@ -61,4 +68,23 @@ public interface UserInfoMapper {
      */
     UserInfo findUserByStuIdAndPassWord(@Param("stuId") String stuId, @Param("password") String password) throws Exception;
 
+    /**
+     * 上传头像
+     */
+    int upload(@Param("fileName") String fileName,@Param("filePath") String filePath,@Param("srcPath") String srcPath);
+
+    /**
+     * 修改头像
+     * @param fileId 头像Id
+     * @param stuId 学号
+     * @return 返回影响条目数
+     */
+    int updateAvatar(@Param("fileId") Integer fileId,@Param("stuId") String stuId);
+
+    /**
+     * 根据图片名称查询图像id
+     * @param fileName
+     * @return
+     */
+    Integer findFileIdByFileName(String fileName);
 }

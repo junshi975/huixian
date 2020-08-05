@@ -1,24 +1,23 @@
 package com.huixian.web;
 
-import com.huixian.center.filter.MyCharacterEncodingFilter;
+
+import com.huixian.common.config.HuiXianConfig;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
-import java.util.Arrays;
+
+/**
+ * 启动类：配置mapper扫描地址，与扫描组件
+ * @author JUN
+ */
 
 @SpringBootApplication
-//配置Mapper扫描的地址
 @MapperScan("com.huixian.system.mapper")
-//配置扫描包的地址！重点！！！
 @ComponentScan(basePackages = "com.huixian")
+@EnableConfigurationProperties(HuiXianConfig.class)
 public class HuiXianAdminApplication {
 
     public static void main(String[] args) {

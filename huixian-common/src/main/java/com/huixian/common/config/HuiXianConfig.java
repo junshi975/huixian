@@ -28,19 +28,20 @@ public class HuiXianConfig {
     private String copyrightYear;
 
     /**
-     * 上传路径
+     * 上传基路径
      */
     private static String profile;
 
     /**
-     * 头像路径
+     * 头像基路径
      */
     private static String photo;
 
     /**
-     * 获取地址开关
+     * 头像访问基路径
      */
-    private static boolean addressEnabled;
+    private static String avatar;
+
 
     public String getName() {
         return name;
@@ -75,14 +76,6 @@ public class HuiXianConfig {
         HuiXianConfig.profile = profile;
     }
 
-    public static boolean isAddressEnabled() {
-        return addressEnabled;
-    }
-
-    public void setAddressEnabled(boolean addressEnabled) {
-        HuiXianConfig.addressEnabled = addressEnabled;
-    }
-
     public static String getPhoto() {
         return photo;
     }
@@ -91,25 +84,16 @@ public class HuiXianConfig {
         HuiXianConfig.photo = photo;
     }
 
-    /**
-     * 获取头像上传路径
-     */
-    public static String getAvatarPath() {
-        return getProfile() + "/avatar";
+    public static String getAvatar() {
+        return avatar;
     }
 
     /**
-     * 获取下载路径
+     * 一定要使用非静态的set方法
+     * @param avatar
      */
-    public static String getDownloadPath() {
-        return getProfile() + "/download/";
-    }
-
-    /**
-     * 获取上传路径
-     */
-    public static String getUploadPath() {
-        return getProfile() + "/upload";
+    public void setAvatar(String avatar) {
+        HuiXianConfig.avatar = avatar;
     }
 }
 

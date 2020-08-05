@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huixian.system.mapper.AvatarMapper">
+
+    <!--查询列-->
+    <sql id="selectColumn">
+       select file_id,file_name,file_path,src_path from user_photo
+    </sql>
+
+    <!--查询封装-->
+    <resultMap id="selectMap" type="com.huixian.common.domain.Avatar">
+        <id property="fileId" column="file_id"/>
+        <result property="fileName" column="file_name"/>
+        <result property="filePath" column="file_path"/>
+        <result property="srcPath" column="src_path"/>
+    </resultMap>
+
+    <!-- =========================== 查询语句============================== -->
+    <select id="findAllAvatar" resultMap="selectMap" >
+        <include refid="selectColumn"/>
+    </select>
+
+    <select id="findAvatarById" resultMap="selectMap" >
+        <include refid="selectColumn"/>
+        where file_id = #{file_id}
+    </select>
+
+    <!-- =========================== 查询结束============================== -->
+
+    <!-- =========================== 插入语句 ============================== -->
+
+    <insert id="addAvatar">
+        INSERT INTO `user_photo` (
+        <trim suffixOverrides=",">
+            <if test="fileName != null and fileName != ''">file_name,</if>
+            <if test="filePath != null and filePath != ''">file_path,</if>
+            <if test="srcPath != null and srcPath != ''">src_path</if>
+        </trim>
+        )VALUES (
+        <trim suffixOverrides=",">
+            <if test="fileName != null and fileName != ''">#{fileName},</if>
+            <if test="filePath != null and filePath != ''">#{filePath},</if>
+            <if test="srcPath != null and srcPath != ''">#{srcPath}</if>
+        </trim>
+        )
+    </insert>
+    <!-- =========================== 插入结束 ============================== -->
+
+</mapper>

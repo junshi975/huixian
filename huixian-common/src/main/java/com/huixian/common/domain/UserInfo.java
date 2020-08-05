@@ -53,14 +53,22 @@ public class UserInfo implements Serializable {
      */
     private String grade;
     /**
-     * 头像
+     * 头像Id,默认为1
      */
-    private String photo = "static/img/default.jpg";
+    private Integer fileId = 1;
     /**
      * 状态
      */
     private Integer status;
+    /**
+     * 格式化后的状态
+     */
     private String statusStr;
+
+    /**
+     * 头像
+     */
+    private Avatar avatar;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -79,8 +87,7 @@ public class UserInfo implements Serializable {
     }
 
 
-    public String getGenderStr() {
-        if (gender != null) {
+    public String getGenderStr() {if (gender != null) {
             switch (gender) {
                 case 1:
                     return genderStr = "女";
@@ -145,6 +152,14 @@ public class UserInfo implements Serializable {
         return gender;
     }
 
+    public Integer getFileId() {
+        return fileId;
+    }
+
+    public void setFileId(Integer fileId) {
+        this.fileId = fileId;
+    }
+
     public void setGender(Integer gender) {
         this.gender = gender;
     }
@@ -165,13 +180,7 @@ public class UserInfo implements Serializable {
         this.grade = grade;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
 
     public Integer getStatus() {
         return status;
@@ -179,6 +188,14 @@ public class UserInfo implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Avatar getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
     }
 
     @Override
@@ -193,9 +210,10 @@ public class UserInfo implements Serializable {
                 ", genderStr='" + genderStr + '\'' +
                 ", phone='" + phone + '\'' +
                 ", grade='" + grade + '\'' +
-                ", photo='" + photo + '\'' +
+                ", fileId='" + fileId + '\'' +
                 ", status=" + status +
                 ", statusStr='" + statusStr + '\'' +
+                ", avatar=" + avatar +
                 '}';
     }
 }
