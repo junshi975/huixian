@@ -1,8 +1,8 @@
 package com.huixian.system.service;
 
-import com.huixian.common.domain.Avatar;
-import com.huixian.common.domain.UserInfo;
+import com.huixian.common.entiry.UserInfo;
 import com.huixian.common.exception.FileException;
+import org.apache.catalina.User;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -62,4 +62,11 @@ public interface UserInfoService {
      */
     boolean updateAvatar(MultipartFile image,String stuId) throws FileException;
 
+    /**
+     * 根据学号Id修改用户信息
+     * @param userInfo 用户信息
+     * @return 成功返回true，失败返回false
+     * @throws Exception
+     */
+    boolean updateUserInfoByStuId(UserInfo userInfo) throws Exception;
 }

@@ -1,6 +1,6 @@
 package com.huixian.web.config;
 
-import com.huixian.common.domain.ResultCode;
+import com.huixian.common.entiry.ResultCode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,18 +38,20 @@ public class SwaggerConfig {
     @Bean
     public Docket docket() {
         List<ResponseMessage> responseMessageList = new ArrayList<>();
-        for (ResultCode errorEnum : ResultCode.values()) {
-            responseMessageList.add(
-                    new ResponseMessageBuilder().code(errorEnum.getCode()).message(errorEnum.getMessage()).build()
-            );
-        }
+        responseMessageList.add(
+                new ResponseMessageBuilder().code(200).message("请求成功！").build()
+        );
+        responseMessageList.add(
+                new ResponseMessageBuilder().code(100).message("请求失败！").build()
+        );
         return new Docket(DocumentationType.SWAGGER_2)
 
                 // 是否启用Swagger
                 .enable(enabled)
                 // 用来创建该API的基本信息，展示在文档的页面中（自定义展示的信息）
                 .apiInfo(apiInfo())
-                //.useDefaultResponseMessages(false)
+                .host("http://www.codewhite.cn")
+                .useDefaultResponseMessages(false)
                 // 添加全局响应状态码
                 .globalResponseMessage(RequestMethod.GET, responseMessageList)
                 .globalResponseMessage(RequestMethod.POST, responseMessageList)
@@ -70,8 +72,9 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 // 设置标题
                 .title("惠闲二手系统_接口文档")
+                .termsOfServiceUrl("http://www.codewhite.cn")
                 // 描述
-                .description("用于二手交易平台的后台API接口")
+                .description("二手交易平台的后台API接口")
                 // 作者信息
                 .contact(new Contact("JUNSHI", "http://www.codewhite.cn", "junshi975@aliyun.com"))
                 // 版本

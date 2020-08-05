@@ -90,7 +90,6 @@ public class HuiXianConfig {
 
     /**
      * 一定要使用非静态的set方法
-     * @param avatar
      */
     public void setAvatar(String avatar) {
         HuiXianConfig.avatar = avatar;

@@ -4,9 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huixian.system.mapper.UserInfoMapper">
 
-    <!--查询列-->
+    <!--查询列（除开密码）-->
     <sql id="selectColumn">
-       select `id`,`nickname`, `password`, `name`, `stu_id`, `gender`, `phone`, `grade`, `file_id`, `status` from user_info
+       select `id`,`nickname`, `name`, `stu_id`, `gender`, `phone`, `grade`, `file_id`, `status` from user_info
     </sql>
 
     <!--查询列-->
@@ -15,10 +15,9 @@
     </sql>
 
     <!--查询封装-->
-    <resultMap id="selectMap" type="com.huixian.common.domain.UserInfo">
+    <resultMap id="selectMap" type="com.huixian.common.entiry.UserInfo">
         <id property="id" column="id"/>
         <result property="nickname" column="nickname"/>
-        <result property="password" column="password"/>
         <result property="name" column="name"/>
         <result property="stuId" column="stu_id"/>
         <result property="gender" column="gender"/>
@@ -48,7 +47,7 @@
         select count(id) from user_info
     </select>
 
-    <select id="findUserByStuIdAndPassWord" parameterType="com.huixian.common.domain.UserInfo" resultMap="selectMap">
+    <select id="findUserByStuIdAndPassWord" parameterType="com.huixian.common.entiry.UserInfo" resultMap="selectMap">
         <include refid="selectColumn"/>
         where stu_id = #{stuId} and password = #{password}
     </select>
@@ -61,7 +60,7 @@
 
 
     <!-- =========================== 插入语句 ============================== -->
-    <insert id="addUser" parameterType="com.huixian.common.domain.UserInfo">
+    <insert id="addUser" parameterType="com.huixian.common.entiry.UserInfo">
         INSERT INTO `user_info` (
         <trim suffixOverrides=",">
             <if test="id != null and id != ''">`id`,</if>
@@ -110,7 +109,7 @@
 
 
     <!-- =========================== 修改语句 ============================== -->
-    <update id="updateUserById" parameterType="com.huixian.common.domain.UserInfo">
+    <update id="updateUserById" parameterType="com.huixian.common.entiry.UserInfo">
         UPDATE `user_info`
         <set>
             <if test="nickname != null and nickname != ''">`nickname` = #{nickname},</if>
@@ -124,6 +123,22 @@
             <if test="status != null ">`status` = #{status}</if>
         </set>
         where id = #{id}
+    </update>
+
+    <update id="updateUserByStuId" parameterType="com.huixian.common.entiry.UserInfo">
+        UPDATE `user_info`
+        <set>
+            <if test="nickname != null and nickname != ''">`nickname` = #{nickname},</if>
+            <if test="password != null and password != ''">`password` = #{password},</if>
+            <if test="name != null and name != ''">`name` = #{name},</if>
+            <if test="stuId != null and stuId != ''">`stu_id` = #{stuId},</if>
+            <if test="gender != null and gender != ''">`gender` = #{gender},</if>
+            <if test="phone != null and phone != ''">`phone` = #{phone},</if>
+            <if test="grade != null and grade != ''">`grade` = #{grade},</if>
+            <if test="fileId != null and fileId != ''">`file_id`= #{fileId},</if>
+            <if test="status != null ">`status` = #{status}</if>
+        </set>
+        where stu_id = #{stuId}
     </update>
 
     <update id="updatePassword">

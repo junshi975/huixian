@@ -1,17 +1,12 @@
 package com.huixian.web;
 
 
-import com.huixian.common.config.HuiXianConfig;
-import com.huixian.common.domain.UserInfo;
-import com.huixian.common.utils.sign.Md5Utils;
 import com.huixian.system.mapper.AvatarMapper;
 import com.huixian.system.mapper.UserInfoMapper;
 import com.huixian.system.service.UserInfoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
 
 
 @SpringBootTest

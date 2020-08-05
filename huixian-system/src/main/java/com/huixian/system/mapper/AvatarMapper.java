@@ -1,6 +1,6 @@
 package com.huixian.system.mapper;
 
-import com.huixian.common.domain.Avatar;
+import com.huixian.common.entiry.Avatar;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

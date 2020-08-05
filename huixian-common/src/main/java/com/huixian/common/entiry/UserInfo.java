@@ -1,8 +1,6 @@
-package com.huixian.common.domain;
+package com.huixian.common.entiry;
 
-import com.github.pagehelper.PageInfo;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;

@@ -1,4 +1,4 @@
-package com.huixian.common.domain;
+package com.huixian.common.entiry;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

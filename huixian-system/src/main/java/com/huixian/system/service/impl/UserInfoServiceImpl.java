@@ -1,7 +1,7 @@
 package com.huixian.system.service.impl;
 
 import com.huixian.common.config.HuiXianConfig;
-import com.huixian.common.domain.UserInfo;
+import com.huixian.common.entiry.UserInfo;
 import com.huixian.common.exception.FileException;
 import com.huixian.common.utils.file.FileUploadUtils;
 import com.huixian.system.mapper.UserInfoMapper;
@@ -77,7 +77,7 @@ public class UserInfoServiceImpl implements UserInfoService {
             String srcPath = HuiXianConfig.getAvatar() + fileName;
 
             int row = userInfoMapper.upload(fileName, filePath, srcPath);
-            if (row ==1){
+            if (row == 1) {
                 return fileName;
             }
 
@@ -101,6 +101,16 @@ public class UserInfoServiceImpl implements UserInfoService {
             }
         }
 
+        return false;
+    }
+
+    @Override
+    public boolean updateUserInfoByStuId(UserInfo userInfo) throws Exception {
+        int rowSize = userInfoMapper.updateUserByStuId(userInfo);
+        //如果影响条目数等于1说明修改成功
+        if (rowSize == 1) {
+            return true;
+        }
         return false;
     }
 }

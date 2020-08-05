@@ -1,14 +1,15 @@
 package com.huixian.web.controller;
 
-import com.huixian.common.domain.Result;
-import com.huixian.common.domain.ResultCode;
-import com.huixian.common.domain.UserInfo;
+import com.huixian.common.entiry.Result;
+import com.huixian.common.entiry.ResultCode;
+import com.huixian.common.entiry.UserInfo;
 import com.huixian.common.exception.FileException;
 import com.huixian.system.service.UserInfoService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
@@ -24,6 +25,23 @@ public class UserController {
     @Autowired
     private UserInfoService userInfoService;
 
+    @ApiOperation("修改用户信息")
+    @PutMapping("/user")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "stuId", value = "学号", dataType = "String", paramType = "stuId", required = true),
+            @ApiImplicitParam(name = "nickname", value = "会员名称", dataType = "String", paramType = "nickname", required = true),
+            @ApiImplicitParam(name = "phone", value = "手机号", dataType = "String", paramType = "phone", required = true),
+            @ApiImplicitParam(name = "grade", value = "所在班级", dataType = "String", paramType = "grade", required = true)
+
+    })
+    public Result updateUserInfo(@ApiIgnore UserInfo userInfo) throws Exception {
+        boolean update = userInfoService.updateUserInfoByStuId(userInfo);
+        if (update){
+            return Result.success("修改成功！");
+
+        }
+        return Result.failure("修改失败！");
+    }
 
     /**
      * 根据学号查询用户详细信息
@@ -41,7 +59,6 @@ public class UserController {
         return Result.failure("找不到此用户");
 
     }
-
 
 
     /**
@@ -145,7 +162,7 @@ public class UserController {
             e.printStackTrace();
             return Result.failure(e.getMessage());
         }
-        return new Result(ResultCode.USER_LOGIN_ERROR);
+        return Result.failure("用户账号或密码错误！");
 
     }
 

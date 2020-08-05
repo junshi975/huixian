@@ -1,7 +1,7 @@
 package com.huixian.system.mapper;
 
 
-import com.huixian.common.domain.UserInfo;
+import com.huixian.common.entiry.UserInfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -46,7 +46,12 @@ public interface UserInfoMapper {
     void updateUserById(UserInfo userInfo) throws Exception;
 
     /**
-     * 根据学号修改用户信息
+     * 根据学号Id修改用户信息
+     */
+    int updateUserByStuId(UserInfo userInfo) throws Exception;
+
+    /**
+     * 根据学号修改用户密码
      */
     void updatePassword(@Param("stuId") String stuId, @Param("pwd") String pwd) throws Exception;
 

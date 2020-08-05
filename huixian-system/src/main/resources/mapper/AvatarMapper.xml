@@ -10,7 +10,7 @@
     </sql>
 
     <!--查询封装-->
-    <resultMap id="selectMap" type="com.huixian.common.domain.Avatar">
+    <resultMap id="selectMap" type="com.huixian.common.entiry.Avatar">
         <id property="fileId" column="file_id"/>
         <result property="fileName" column="file_name"/>
         <result property="filePath" column="file_path"/>
