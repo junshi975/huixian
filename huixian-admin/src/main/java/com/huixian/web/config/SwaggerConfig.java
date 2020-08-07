@@ -1,5 +1,6 @@
 package com.huixian.web.config;
 
+import com.google.common.base.Predicates;
 import com.huixian.common.entiry.ResultCode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -50,7 +51,7 @@ public class SwaggerConfig {
                 .enable(enabled)
                 // 用来创建该API的基本信息，展示在文档的页面中（自定义展示的信息）
                 .apiInfo(apiInfo())
-                .host("http://www.codewhite.cn")
+                .host("https://www.codewhite.cn")
                 .useDefaultResponseMessages(false)
                 // 添加全局响应状态码
                 .globalResponseMessage(RequestMethod.GET, responseMessageList)
@@ -61,6 +62,8 @@ public class SwaggerConfig {
                 .select()
                 // 扫描所有 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
+                //错误路径不监控
+                .paths(Predicates.not(PathSelectors.regex("/error.*")))
                 .build();
     }
 
@@ -72,11 +75,11 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 // 设置标题
                 .title("惠闲二手系统_接口文档")
-                .termsOfServiceUrl("http://www.codewhite.cn")
+                .termsOfServiceUrl("https://www.codewhite.cn")
                 // 描述
                 .description("二手交易平台的后台API接口")
                 // 作者信息
-                .contact(new Contact("JUNSHI", "http://www.codewhite.cn", "junshi975@aliyun.com"))
+                .contact(new Contact("JUNSHI", "https://www.codewhite.cn", "junshi975@aliyun.com"))
                 // 版本
                 .version("版本号:V1.0")
                 .build();

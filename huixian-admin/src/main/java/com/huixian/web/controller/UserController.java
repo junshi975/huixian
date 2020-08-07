@@ -20,10 +20,17 @@ import java.util.List;
  */
 @Api(tags = "用户操作接口")
 @RestController
+//@CrossOrigin
 public class UserController {
 
     @Autowired
     private UserInfoService userInfoService;
+
+    @PostMapping("/head")
+    public Result getHeader(@RequestHeader("Content-Type") String requestHeader) {
+        return Result.success(requestHeader);
+    }
+
 
     @ApiOperation("修改用户信息")
     @PutMapping("/user")
@@ -36,7 +43,7 @@ public class UserController {
     })
     public Result updateUserInfo(@ApiIgnore UserInfo userInfo) throws Exception {
         boolean update = userInfoService.updateUserInfoByStuId(userInfo);
-        if (update){
+        if (update) {
             return Result.success("修改成功！");
 
         }
@@ -51,7 +58,7 @@ public class UserController {
     @ApiOperation("根据学号查询用户详细信息")
     @GetMapping("/user/{stuId}")
     @ApiImplicitParam(name = "stuId", value = "学号", dataType = "String", paramType = "stuId", required = true)
-    public Result userInfo(@PathVariable String stuId) throws Exception {
+    public Result userInfo(@PathVariable("stuId") String stuId) throws Exception {
         UserInfo userInfo = userInfoService.findUserInfoByStuId(stuId);
         if (userInfo != null) {
             return Result.success(userInfo);
@@ -141,17 +148,13 @@ public class UserController {
      * @param stuId    学号
      */
     @ApiOperation("登陆")
-    @PostMapping("/login")
+    @PostMapping(value = "/login")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "stuId", value = "学生学号", required = true, dataType = "String"),
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String")
 
     })
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "登陆成功"),
-            @ApiResponse(code = 2003, message = "用户不存在或密码错误")
 
-    })
     public Result login(String password, String stuId) {
         try {
             boolean login = userInfoService.login(stuId, password);

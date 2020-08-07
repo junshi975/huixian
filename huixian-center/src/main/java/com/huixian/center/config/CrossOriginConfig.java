@@ -14,7 +14,6 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 public class CrossOriginConfig {
 
-
     /**
      * 配置全局跨域
      */

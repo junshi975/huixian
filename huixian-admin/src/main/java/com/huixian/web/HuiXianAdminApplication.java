@@ -16,7 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @MapperScan("com.huixian.system.mapper")
-@ComponentScan(basePackages = "com.huixian")
+@ComponentScan(basePackages = {"com.huixian"})
 @EnableConfigurationProperties(HuiXianConfig.class)
 public class HuiXianAdminApplication {
 
