@@ -10,20 +10,28 @@
     </parent>
 
     <artifactId>huixian-center</artifactId>
+
     <description>框架中心</description>
 
 
 
     <dependencies>
 
-        <!-- SpringBoot Web容器 -->
+
+        <!-- SpringBoot 拦截器 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.huixian</groupId>
             <artifactId>huixian-common</artifactId>
+            <version>${huixian.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.huixian</groupId>
+            <artifactId>huixian-system</artifactId>
             <version>${huixian.version}</version>
         </dependency>
 

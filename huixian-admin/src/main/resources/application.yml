@@ -8,7 +8,7 @@ huixian:
   copyrightYear: 2020
   # 文件路径 示例（ Windows配置E:\data\img\，Linux配置 /data/huixian/userphoto/）
   # 加上斜杠，因为返回的地址是拼串。
-  profile: E:\data\img\
+  profile: E:\生产力工具\惠闲交易系统\io\
   # 用户头像地址
   photo: E:\data\img\
   # 用户头像访问地址：
@@ -31,11 +31,7 @@ server:
       enabled: true
 
 
-# 日志配置
-logging:
-  level:
-    com.huixian: debug
-    org.springframework: warn
+
 
 # spring 配置
 spring:

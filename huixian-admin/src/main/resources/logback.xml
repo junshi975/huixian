@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!--日志文件保存路径：默认当前项目所在的盘符/huixian/logs/目录下-->
+    <property name="file_path" value="/huixian/logs/"/>
+
+    <!-- 定义日志文件名称:项目名 -->
+    <property name="appName" value="huixian"/>
+
+    <!-- 文件日志输出格式 -->
+    <property name="file_pattern"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} = [%thread] = [%-5level] = %logger{50} - [%method,%line] - %msg%n"/>
+
+    <!-- 控制台日志输出格式 -->
+    <property name="console_pattern"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} = [%thread] = [%-5level] = %logger{25} - [%method,%line] - %msg%n"/>
+
+    <!--控制台日志输出-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--调用：name的值-->
+            <pattern>${console_pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!--错误日志归档-->
+    <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 指定日志文件的名称 -->
+        <file>${file_path}/sys_error.log</file>
+        <!--日志追加到末尾-->
+        <append>true</append>
+        <!--TimeBasedRollingPolicy： 最常用的滚动策略，它根据时间来制定滚动策略，既负责滚动也负责出发滚动 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件名格式 -->
+            <fileNamePattern>${file_path}/sys_error.%d{yyyy-MM-dd}.(%i).log</fileNamePattern>
+            <!--日志最大的历史 60天 -->
+            <maxHistory>60</maxHistory>
+            <!--配置日志文件大小-->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <!--日志输出格式： -->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${file_pattern}</pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!--过滤的级别:只接受ERROR错误 -->
+            <level>ERROR</level>
+            <!--匹配时的操作：接收（记录） -->
+            <onMatch>ACCEPT</onMatch>
+            <!--不匹配时的操作：拒绝（不记录） -->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!--INFO日志归档-->
+    <appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 指定日志文件的名称 -->
+        <file>${file_path}/sys_info.log</file>
+        <!--日志追加到末尾-->
+        <append>true</append>
+        <!--TimeBasedRollingPolicy： 最常用的滚动策略，它根据时间来制定滚动策略，既负责滚动也负责出发滚动 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件名格式 -->
+            <fileNamePattern>${file_path}/sys_info.%d{yyyy-MM-dd}.(%i).log</fileNamePattern>
+            <!--日志最大的历史 60天 -->
+            <maxHistory>60</maxHistory>
+            <!--配置日志文件大小-->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <!--日志输出格式： -->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${file_pattern}</pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!--过滤的级别:只接受INFO错误 -->
+            <level>INFO</level>
+            <!--匹配时的操作：接收（记录） -->
+            <onMatch>ACCEPT</onMatch>
+            <!--不匹配时的操作：拒绝（不记录） -->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- 用户访问日志输出  -->
+    <appender name="sys-user" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${file_path}/sys-user.log</file>
+        <!--TimeBasedRollingPolicy： 最常用的滚动策略，它根据时间来制定滚动策略，既负责滚动也负责出发滚动 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件名格式 -->
+            <fileNamePattern>${file_path}/sys_user.%d{yyyy-MM-dd}.(%i).log</fileNamePattern>
+            <!--日志最大的历史 60天 -->
+            <maxHistory>60</maxHistory>
+            <!--配置日志文件大小-->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${file_pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!--INFO异步日志-->
+    <appender name="file_info_async" class="ch.qos.logback.classic.AsyncAppender">
+        <!--指定某个具体的 appender-->
+        <appender-ref ref="file_info"/>
+    </appender>
+
+    <!--错误信息异步日志-->
+    <appender name="file_error_async" class="ch.qos.logback.classic.AsyncAppender">
+        <!--指定某个具体的 appender-->
+        <appender-ref ref="file_error"/>
+    </appender>
+    <!--用户模块异步日志-->
+    <appender name="sys_user_async" class="ch.qos.logback.classic.AsyncAppender">
+        <!--指定某个具体的 appender-->
+        <appender-ref ref="sys-user"/>
+    </appender>
+
+    <!--myibatis log configure-->
+    <logger name="com.apache.ibatis" level="TRACE" additivity="false"/>
+    <logger name="java.sql.Connection" level="DEBUG"/>
+    <logger name="java.sql.Statement" level="DEBUG"/>
+    <logger name="java.sql.PreparedStatement" level="DEBUG"/>
+    <!-- Spring framework logger -->
+    <logger name="org.springframework" level="warn" additivity="false">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <!--com.huixian包下日志的默认规则:DEBUG可以查看SQL-->
+    <logger name="com.huixian" level="DEBUG"/>
+
+    <root level="INFO">
+        <!--控制台日志-->
+        <appender-ref ref="console"/>
+        <!--系统操作日志-->
+        <appender-ref ref="file_info_async"/>
+        <appender-ref ref="file_error_async"/>
+        <!--系统用户日志-->
+        <appender-ref ref="sys_user_async"/>
+    </root>
+
+</configuration>

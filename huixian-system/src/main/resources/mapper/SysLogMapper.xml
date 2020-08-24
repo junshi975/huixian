@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huixian.system.mapper.SysLogMapper">
+
+    <!--查询列-->
+    <sql id="selectColumn">
+        select id,username,operatingTime,useTime,ip,url,method,requestType,title,businessType,returnArgs
+        from sys_log
+    </sql>
+
+    <!--查询封装-->
+    <resultMap id="selectMap" type="com.huixian.common.domain.SysLog">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="operatingTime" column="operatingTime"/>
+        <result property="useTime" column="useTime"/>
+        <result property="ip" column="ip"/>
+        <result property="url" column="url"/>
+        <result property="method" column="method"/>
+        <result property="requestType" column="requestType"/>
+        <result property="title" column="title"/>
+        <result property="businessType" column="businessType"/>
+        <result property="returnArgs" column="returnArgs"/>
+    </resultMap>
+
+    <!-- =========================== 查询语句============================== -->
+    <select id="findAllLog" resultMap="selectMap">
+        <include refid="selectColumn"/>
+    </select>
+
+    <select id="findLogById" resultMap="selectMap">
+        <include refid="selectColumn"/>
+        where id = #{id}
+    </select>
+
+    <!-- =========================== 查询结束============================== -->
+
+    <!-- =========================== 插入语句 ============================== -->
+
+    <insert id="insertLog" parameterType="com.huixian.common.domain.SysLog">
+        INSERT into sys_log(
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">id,</if>
+            <if test="username != null and username != ''">username,</if>
+            <if test="operatingTime != null">operatingTime,</if>
+            <if test="useTime != null and useTime != '0'">useTime,</if>
+            <if test="ip != null and ip != ''">ip,</if>
+            <if test="url != null and url != ''">url,</if>
+            <if test="method != null and method != ''">method,</if>
+            <if test="requestType != null and requestType != ''">requestType,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="businessType != null and businessType != ''">businessType,</if>
+            <if test="returnArgs != null and returnArgs != ''">returnArgs</if>
+        </trim>
+        )VALUES (
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">#{id},</if>
+            <if test="username != null and username != ''">#{username},</if>
+            <if test="operatingTime != null">#{operatingTime},</if>
+            <if test="useTime != null and useTime != '0'">#{useTime},</if>
+            <if test="ip != null and ip != ''">#{ip},</if>
+            <if test="url != null and url != ''">#{url},</if>
+            <if test="method != null and method != ''">#{method},</if>
+            <if test="requestType != null and requestType != ''">#{requestType},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="businessType != null and businessType != ''">#{businessType},</if>
+            <if test="returnArgs != null and returnArgs != ''">#{returnArgs}</if>
+        </trim>
+        )
+    </insert>
+    <!-- =========================== 插入结束 ============================== -->
+
+    <!-- =========================== 删除语句 ============================== -->
+    <delete id="deleteLog">
+        delete from sys_log where id = #{id}
+    </delete>
+
+    <!-- =========================== 删除结束 ============================== -->
+
+
+</mapper>
