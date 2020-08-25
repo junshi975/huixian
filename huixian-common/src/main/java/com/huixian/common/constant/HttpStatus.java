@@ -2,11 +2,8 @@ package com.huixian.common.constant;
 
 /**
  * 返回状态码
- * 
- * @author ruoyi
  */
-public class HttpStatus
-{
+public class HttpStatus {
     /**
      * 操作成功
      */

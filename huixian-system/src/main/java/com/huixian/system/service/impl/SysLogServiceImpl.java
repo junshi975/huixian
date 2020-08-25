@@ -1,6 +1,6 @@
 package com.huixian.system.service.impl;
 
-import com.huixian.common.domain.SysLog;
+import com.huixian.common.entiry.SysLog;
 import com.huixian.system.mapper.SysLogMapper;
 import com.huixian.system.service.SysLogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +41,17 @@ public class SysLogServiceImpl implements SysLogService {
     public boolean deleteSysLog(String id) throws Exception {
         int row = sysLogMapper.deleteLog(id);
         return row == 1;
+    }
+
+    @Override
+    public boolean deleteLogByIds(String[] ids) {
+        int i = sysLogMapper.deleteLogByIds(ids);
+        return i > 0;
+    }
+
+    @Override
+    public boolean cleanSysLog() throws Exception {
+        int i = sysLogMapper.cleanSysLog();
+        return i > 0;
     }
 }

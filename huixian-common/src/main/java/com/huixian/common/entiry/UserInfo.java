@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * Users表实体类
+ * Users表
  * @author JUNSHI 405773808@qq.com
  * @create 2020-07-25 14:15
  */

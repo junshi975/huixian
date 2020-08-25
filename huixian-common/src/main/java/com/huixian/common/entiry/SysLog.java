@@ -1,4 +1,4 @@
-package com.huixian.common.domain;
+package com.huixian.common.entiry;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -7,7 +7,7 @@ import com.huixian.common.utils.DateUtils;
 import java.util.Date;
 
 /**
- * 系统日志Bean
+ * 系统日志表
  * @author JUNSHI 405773808@qq.com
  * @create 2020-07-02 22:35
  */
@@ -21,7 +21,7 @@ public class SysLog {
     /**
      * 操作时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date operatingTime;
 
     /**
@@ -29,10 +29,6 @@ public class SysLog {
      */
     private Long useTime;
 
-    /**
-     * 操作时间字符串
-     */
-    private String operatingTimeStr;
 
     /**
      * 操作用户
@@ -76,11 +72,10 @@ public class SysLog {
     public SysLog() {
     }
 
-    public SysLog(String id, Date operatingTime, Long useTime, String operatingTimeStr, String username, String ip, String url, String method, String requestType, String title, Integer businessType, String returnArgs) {
+    public SysLog(String id, Date operatingTime, Long useTime,  String username, String ip, String url, String method, String requestType, String title, Integer businessType, String returnArgs) {
         this.id = id;
         this.operatingTime = operatingTime;
         this.useTime = useTime;
-        this.operatingTimeStr = operatingTimeStr;
         this.username = username;
         this.ip = ip;
         this.url = url;
@@ -107,17 +102,6 @@ public class SysLog {
         this.operatingTime = operatingTime;
     }
 
-
-    public String getOperatingTimeStr() {
-        if (operatingTime != null) {
-            operatingTimeStr = DateUtils.parseDateToStr("yyyy-MM-dd HH:mm:ss", operatingTime);
-        }
-        return operatingTimeStr;
-    }
-
-    public void setOperatingTimeStr(String operatingTimeStr) {
-        this.operatingTimeStr = operatingTimeStr;
-    }
 
     public String getUsername() {
         return username;
@@ -198,7 +182,6 @@ public class SysLog {
                 "id='" + id + '\'' +
                 ", operatingTime=" + operatingTime +
                 ", useTime=" + useTime +
-                ", operatingTimeStr='" + operatingTimeStr + '\'' +
                 ", username='" + username + '\'' +
                 ", ip='" + ip + '\'' +
                 ", url='" + url + '\'' +

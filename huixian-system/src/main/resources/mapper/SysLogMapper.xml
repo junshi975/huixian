@@ -11,7 +11,7 @@
     </sql>
 
     <!--查询封装-->
-    <resultMap id="selectMap" type="com.huixian.common.domain.SysLog">
+    <resultMap id="selectMap" type="com.huixian.common.entiry.SysLog">
         <id property="id" column="id"/>
         <result property="username" column="username"/>
         <result property="operatingTime" column="operatingTime"/>
@@ -39,7 +39,7 @@
 
     <!-- =========================== 插入语句 ============================== -->
 
-    <insert id="insertLog" parameterType="com.huixian.common.domain.SysLog">
+    <insert id="insertLog" parameterType="com.huixian.common.entiry.SysLog">
         INSERT into sys_log(
         <trim suffixOverrides=",">
             <if test="id != null and id != ''">id,</if>
@@ -72,9 +72,23 @@
     </insert>
     <!-- =========================== 插入结束 ============================== -->
 
+    <!-- =========================== 修改语句 ============================== -->
+    <update id="cleanSysLog">
+        truncate table sys_log
+    </update>
+
+    <!-- =========================== 修改结束 ============================== -->
+
     <!-- =========================== 删除语句 ============================== -->
     <delete id="deleteLog">
         delete from sys_log where id = #{id}
+    </delete>
+
+    <delete id="deleteLogByIds" parameterType="string">
+        delete from sys_log where id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
     </delete>
 
     <!-- =========================== 删除结束 ============================== -->

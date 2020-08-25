@@ -1,14 +1,14 @@
 package com.huixian.web.controller;
 
+import com.huixian.center.manager.LoginLogHandler;
 import com.huixian.common.annotation.Log;
-import com.huixian.common.entiry.Result;
-import com.huixian.common.entiry.ResultCode;
+import com.huixian.common.constant.Constants;
+import com.huixian.common.domain.Result;
+import com.huixian.common.entiry.SysLogininfor;
 import com.huixian.common.entiry.UserInfo;
 import com.huixian.common.enums.BusinessType;
 import com.huixian.common.exception.FileException;
-import com.huixian.common.utils.ip.IPUtils;
 import com.huixian.system.service.UserInfoService;
-import com.huixian.web.HuiXianAdminApplication;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.annotations.ApiIgnore;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -34,9 +33,11 @@ public class UserController {
 
     @Autowired
     private UserInfoService userInfoService;
+    @Autowired
+    private LoginLogHandler loginLogHandler;
 
 
-    @Log(title = "用户模块",businessType = BusinessType.UPDATE)
+    @Log(title = "用户模块", businessType = BusinessType.UPDATE)
     @ApiOperation("修改用户信息")
     @PutMapping("/user")
     @ApiImplicitParams({
@@ -60,7 +61,7 @@ public class UserController {
      * @param stuId 学号
      * @return 成功200，失败100
      */
-    @Log(title = "用户模块",businessType = BusinessType.OTHER)
+    @Log(title = "用户模块", businessType = BusinessType.OTHER)
     @ApiOperation("根据学号查询用户详细信息")
     @GetMapping("/user/{stuId}")
     @ApiImplicitParam(name = "stuId", value = "学号", dataType = "String", paramType = "stuId", required = true)
@@ -81,7 +82,7 @@ public class UserController {
      * @return 成功200，失败100
      * @throws FileException 文件异常
      */
-    @Log(title = "用户模块",businessType = BusinessType.UPDATE)
+    @Log(title = "用户模块", businessType = BusinessType.UPDATE)
     @ApiOperation("根据学号修改头像")
     @PostMapping("/upload")
     @ApiImplicitParams({
@@ -106,7 +107,7 @@ public class UserController {
      * @param newPwd 新密码
      * @return 成功200，失败100
      */
-    @Log(title = "用户模块",businessType = BusinessType.UPDATE)
+    @Log(title = "用户模块", businessType = BusinessType.UPDATE)
     @ApiOperation("修改用户密码")
     @PutMapping("/user/stuId/{stuId}/pwd/{pwd}/newPwd/{newPwd}")
     @ApiImplicitParams({
@@ -132,7 +133,7 @@ public class UserController {
      * 获取所有用户信息
      * @return 所有用户信息
      */
-    @Log(title = "用户模块",businessType = BusinessType.OTHER)
+    @Log(title = "用户模块", businessType = BusinessType.OTHER)
     @ApiOperation("返回所有用户信息")
     @GetMapping("/users")
     public Result getAll() {
@@ -156,7 +157,7 @@ public class UserController {
      * @param password 密码
      * @param stuId    学号
      */
-    @Log(title = "用户模块",businessType = BusinessType.OTHER)
+    @Log(title = "用户模块", businessType = BusinessType.OTHER)
     @ApiOperation("登陆")
     @PostMapping(value = "/login")
     @ApiImplicitParams({
@@ -164,17 +165,18 @@ public class UserController {
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String")
 
     })
-
     public Result login(String password, String stuId) {
         try {
             boolean login = userInfoService.login(stuId, password);
             if (login) {
+                loginLogHandler.recording(stuId, Constants.LOGIN_SUCCESS, "登陆成功");
                 return Result.success("登陆成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
             return Result.failure(e.getMessage());
         }
+        loginLogHandler.recording(stuId, Constants.LOGIN_FAIL, "登陆失败");
         return Result.failure("用户账号或密码错误！");
 
     }

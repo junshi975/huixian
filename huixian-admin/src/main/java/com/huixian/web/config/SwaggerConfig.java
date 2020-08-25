@@ -1,7 +1,6 @@
 package com.huixian.web.config;
 
 import com.google.common.base.Predicates;
-import com.huixian.common.entiry.ResultCode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 头像实体类
+ * 头像表
  * @author JUNSHI 405773808@qq.com
  * @create 2020-08-03 19:59
  */

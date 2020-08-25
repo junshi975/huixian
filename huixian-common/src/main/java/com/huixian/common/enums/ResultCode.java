@@ -1,4 +1,4 @@
-package com.huixian.common.entiry;
+package com.huixian.common.enums;
 
 
 /**

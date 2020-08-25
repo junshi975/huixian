@@ -1,46 +1,47 @@
 package com.huixian.system.mapper;
 
 import com.huixian.common.entiry.SysLog;
+import com.huixian.common.entiry.SysLogininfor;
 
 import java.util.List;
 
 /**
- * 系统操作日志mapper
+ * 登陆日志mapper
  * @author JUNSHI 405773808@qq.com
  * @create 2020-08-24 20:59
  */
-public interface SysLogMapper {
+public interface SysLogininforMapper {
 
     /**
      * 查询所有Log
      */
-    List<SysLog> findAllLog() throws Exception;
+    List<SysLogininfor> findAllLoginLog() throws Exception;
 
     /**
      * 根据id查询log
      */
-    SysLog findLogById(String id)  throws Exception;
+    SysLogininfor findLoginLogById(String id)  throws Exception;
 
     /**
      * 插入一条log日志
      */
-    int insertLog(SysLog sysLog)  throws Exception;
+    int insertLoginLog(SysLogininfor sysLogininfor)  throws Exception;
 
     /**
      * 根据logid查询log
      */
-    int deleteLog(String id) throws Exception;
+    int deleteLoginLog(String id) throws Exception;
 
     /**
      * 清空所有日志
      * @return 返回影响行数
      */
-    int cleanSysLog() throws Exception;
+    int cleanLoginLog() throws Exception;
 
     /**
      *  批量删除系统操作日志
      * @param ids 需要删除的操作日志ID
      */
-    int deleteLogByIds(String[] ids);
+    int deleteLoginLogByIds(String[] ids);
 
 }

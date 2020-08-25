@@ -1,6 +1,7 @@
-package com.huixian.common.entiry;
+package com.huixian.common.domain;
 
 
+import com.huixian.common.enums.ResultCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

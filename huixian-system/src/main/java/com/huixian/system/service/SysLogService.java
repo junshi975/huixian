@@ -1,7 +1,6 @@
 package com.huixian.system.service;
 
-import com.huixian.common.domain.SysLog;
-import org.springframework.transaction.annotation.Transactional;
+import com.huixian.common.entiry.SysLog;
 
 import java.util.List;
 
@@ -35,4 +34,16 @@ public interface SysLogService {
      * @return true表示插入成功，false失败
      */
     boolean deleteSysLog(String id) throws Exception;
+
+    /**
+     * 批量删除系统操作日志
+     * @param ids 需要删除的操作日志ID
+     * @return 成功返回true，失败返回false
+     */
+    boolean deleteLogByIds(String[] ids);
+
+    /**
+     * 清空操作日志
+     */
+    boolean cleanSysLog() throws Exception;
 }

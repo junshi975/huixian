@@ -1,13 +1,11 @@
 package com.huixian.center.aspectj;
 
-import com.alibaba.fastjson.JSONObject;
 import com.huixian.common.annotation.Log;
-import com.huixian.common.domain.SysLog;
+import com.huixian.common.entiry.SysLog;
 import com.huixian.common.utils.DateUtils;
 import com.huixian.common.utils.ServletUtils;
 import com.huixian.common.utils.ip.IPUtils;
 import com.huixian.common.utils.uuid.IdUtils;
-import com.huixian.system.mapper.SysLogMapper;
 import com.huixian.system.service.SysLogService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
@@ -34,6 +32,7 @@ public class LogAspect {
      * 日志记录器
      */
     private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
+    private static final Integer LENGTH = 225;
 
     /**
      * 执行时间
@@ -97,10 +96,10 @@ public class LogAspect {
             sysLog.setUrl(ServletUtils.getRequest().getRequestURI());
 
 
-            int length = JSONObject.toJSONString(jsonResult).length();
-            String result = JSONObject.toJSONString(jsonResult);
+            String result = jsonResult.toString();
+
             //如果大于数据库长度
-            if (length >= 225) {
+            if (result.length() >= LENGTH) {
                 result = "{}";
             }
             //方法返回的参数
