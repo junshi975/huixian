@@ -8,11 +8,12 @@ huixian:
   copyrightYear: 2020
   # 文件路径 示例（ Windows配置E:\data\img\，Linux配置 /data/huixian/userphoto/）
   # 加上斜杠，因为返回的地址是拼串。
-  profile: E:\生产力工具\惠闲交易系统\io\
+  profile: /data/huixian/userphoto/
   # 用户头像地址
-  photo: E:\data\img\
+  photo: /data/huixian/userphoto/
   # 用户头像访问地址：
-  avatar: http://localhost:8000/img/
+  #  avatar: http://localhost:8000/img/
+  avatar: http://codewhite.cn/userphoto/
 
 # 开发环境配置
 server:
@@ -29,9 +30,6 @@ server:
       force: true
       charset: utf-8
       enabled: true
-
-
-
 
 # spring 配置
 spring:
@@ -95,10 +93,13 @@ mybatis:
   type-aliases-package: com.huixian.common.pojo  # 注意：对应实体类的路径
   configuration: # 驼峰命名需要
     map-underscore-to-camel-case: true    # 驼峰命名开启
-
-
+# PageHelper分页插件
+pagehelper:
+  #  使用mysql
+  helperDialect: mysql
+  #  分页合理化
+  reasonable: true
 # swagger配置
 swagger:
-#  是否开启
+  #  是否开启
   enabled: true
-

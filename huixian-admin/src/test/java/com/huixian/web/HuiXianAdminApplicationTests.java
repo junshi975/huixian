@@ -1,6 +1,7 @@
 package com.huixian.web;
 
 
+import com.github.pagehelper.PageHelper;
 import com.huixian.center.aspectj.LogAspect;
 import com.huixian.common.entiry.SysLog;
 import com.huixian.common.entiry.SysLogininfor;
@@ -28,6 +29,7 @@ public class HuiXianAdminApplicationTests {
 
     @Test
     void contextLoads() throws Exception {
+
         String[] ids = {"1","2"} ;
         System.out.println(sysLogininforMapper.deleteLoginLogByIds(ids));
     }

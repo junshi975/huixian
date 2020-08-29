@@ -52,5 +52,6 @@ public class SysLogininfor implements Serializable {
     /**
      * 登陆信息
      */
+    @JsonFormat
     private String msg;
 }
