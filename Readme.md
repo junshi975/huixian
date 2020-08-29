@@ -92,12 +92,15 @@ com.huixian
 ├── center                               // 框架核心
 │       └── config      //配置信息
 │       └── aspectj     //AOP切面
-│       └── aspectj     //过滤器
+│       └── manager     //后台管理
 ├── common                               // 工具类
+│       └── annotation  //自定义注解
 │       └── config      //通用配置
 │       └── constant    //固定类
 │       └── core        //核心工具
+│       └── domain      //实体类
 │       └── entiry      //数据库实体Bean
+│       └── enums       //通用枚举
 │       └── exception   //通用异常
 │       └── utils   	//工具类包
 ├── system                               // 系统模块
