@@ -10,6 +10,11 @@
         from sys_log
     </sql>
 
+    <!--插入列-->
+    <sql id="insertColumn">
+           insert into sys_log(id,username,operatingTime,useTime,ip,url,method,requestType,title,businessType,returnArgs)
+    </sql>
+
     <!--查询封装-->
     <resultMap id="selectMap" type="com.huixian.common.entiry.SysLog">
         <id property="id" column="id"/>
@@ -69,6 +74,24 @@
             <if test="returnArgs != null and returnArgs != ''">#{returnArgs}</if>
         </trim>
         )
+    </insert>
+    <!--批量插入-->
+    <insert id="insertLogs" parameterType="list">
+        <include refid="insertColumn"/>
+        VALUES
+        <foreach collection="sysLogs" item="sysLog" index="index" separator=",">
+            (#{sysLog.id},
+            #{sysLog.username},
+            #{sysLog.operatingTime},
+            #{sysLog.useTime},
+            #{sysLog.ip},
+            #{sysLog.url},
+            #{sysLog.method},
+            #{sysLog.requestType},
+            #{sysLog.title},
+            #{sysLog.businessType},
+            #{sysLog.returnArgs})
+        </foreach>
     </insert>
     <!-- =========================== 插入结束 ============================== -->
 

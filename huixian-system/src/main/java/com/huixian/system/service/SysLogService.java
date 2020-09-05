@@ -1,6 +1,7 @@
 package com.huixian.system.service;
 
 import com.huixian.common.entiry.SysLog;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -41,9 +42,12 @@ public interface SysLogService {
      * @return 成功返回true，失败返回false
      */
     boolean deleteLogByIds(String[] ids);
-
+    /**
+     * 插入多条日志
+     */
+    boolean saveLogs(List<SysLog> sysLogs)  throws Exception;
     /**
      * 清空操作日志
      */
-    boolean cleanSysLog() throws Exception;
+    void cleanSysLog() throws Exception;
 }

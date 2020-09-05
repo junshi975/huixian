@@ -39,7 +39,8 @@
     </select>
 
     <select id="findUserByStuId" resultMap="selectMap">
-        <include refid="selectColumn"/>
+       select `id`,`nickname`,`password`, `name`, `stu_id`, `gender`, `phone`, `grade`, `file_id`, `status`
+       from user_info
         where stu_id = #{stuId}
     </select>
 

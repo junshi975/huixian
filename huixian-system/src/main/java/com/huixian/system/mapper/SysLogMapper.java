@@ -1,6 +1,7 @@
 package com.huixian.system.mapper;
 
 import com.huixian.common.entiry.SysLog;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -26,6 +27,12 @@ public interface SysLogMapper {
      */
     int insertLog(SysLog sysLog)  throws Exception;
 
+
+    /**
+     * 插入多条日志
+     */
+    int insertLogs(@Param("sysLogs") List<SysLog> sysLogs)  throws Exception;
+
     /**
      * 根据logid查询log
      */
@@ -33,9 +40,8 @@ public interface SysLogMapper {
 
     /**
      * 清空所有日志
-     * @return 返回影响行数
      */
-    int cleanSysLog() throws Exception;
+    void cleanSysLog() throws Exception;
 
     /**
      *  批量删除系统操作日志

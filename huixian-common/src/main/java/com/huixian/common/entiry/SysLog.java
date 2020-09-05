@@ -1,7 +1,10 @@
 package com.huixian.common.entiry;
 
 
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.format.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.huixian.common.core.text.convert.SysLogConverter;
 import com.huixian.common.utils.DateUtils;
 
 import java.util.Date;
@@ -16,63 +19,77 @@ public class SysLog {
     /**
      * 编号
      */
+    @ExcelProperty("ID")
     private String id;
 
     /**
-     * 操作时间
+     * 操作模块
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private Date operatingTime;
+    @ExcelProperty("操作模块")
+    private String title;
 
     /**
-     * 执行时长
+     * 访问方法
      */
-    private Long useTime;
+    @ExcelProperty("访问方法")
+    private String method;
+
+    /**
+     * 请求方式
+     */
+    @ExcelProperty("请求方式")
+    private String requestType;
 
 
     /**
      * 操作用户
      */
+    @ExcelProperty("操作用户")
     private String username;
+
+
+    /**
+     * 请求的url
+     */
+    @ExcelProperty("访问地址")
+    private String url;
 
     /**
      * 主机IP
      */
+    @ExcelProperty("主机IP")
     private String ip;
-    /**
-     * 请求的url
-     */
-    private String url;
 
     /**
-     * 访问方法
+     * 执行时长
      */
-    private String method;
-    /**
-     * 请求方式
-     */
-    private String requestType;
-
-    /**
-     * 操作模块
-     */
-    private String title;
+    @ExcelProperty("执行时长")
+    private Long useTime;
 
     /**
      * 业务类型（0其它 1新增 2修改 3删除）
      */
+    @ExcelProperty(value = "业务类型",converter = SysLogConverter.class)
     private Integer businessType;
 
     /**
      * 返回参数
      */
+    @ExcelProperty("返回参数")
     private String returnArgs;
 
+    /**
+     * 操作时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat("yyyy-MM-dd HH:mm:ss")
+    @ExcelProperty("操作时间")
+    private Date operatingTime;
 
     public SysLog() {
     }
 
-    public SysLog(String id, Date operatingTime, Long useTime,  String username, String ip, String url, String method, String requestType, String title, Integer businessType, String returnArgs) {
+    public SysLog(String id, Date operatingTime, Long useTime, String username, String ip, String url, String method, String requestType, String title, Integer businessType, String returnArgs) {
         this.id = id;
         this.operatingTime = operatingTime;
         this.useTime = useTime;
@@ -144,7 +161,6 @@ public class SysLog {
     }
 
 
-
     public String getTitle() {
         return title;
     }
@@ -176,6 +192,7 @@ public class SysLog {
     public void setBusinessType(Integer businessType) {
         this.businessType = businessType;
     }
+
     @Override
     public String toString() {
         return "SysLog{" +

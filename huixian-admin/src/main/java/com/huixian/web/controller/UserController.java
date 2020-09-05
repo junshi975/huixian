@@ -10,6 +10,9 @@ import com.huixian.common.enums.BusinessType;
 import com.huixian.common.exception.FileException;
 import com.huixian.system.service.UserInfoService;
 import io.swagger.annotations.*;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.*;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
+
+import static com.huixian.common.domain.Result.success;
 
 /**
  * 用户操作接口
@@ -50,7 +55,7 @@ public class UserController {
     public Result updateUserInfo(@ApiIgnore UserInfo userInfo) throws Exception {
         boolean update = userInfoService.updateUserInfoByStuId(userInfo);
         if (update) {
-            return Result.success("修改成功！");
+            return success("修改成功！");
 
         }
         return Result.failure("修改失败！");
@@ -68,7 +73,7 @@ public class UserController {
     public Result userInfo(@PathVariable("stuId") String stuId) throws Exception {
         UserInfo userInfo = userInfoService.findUserInfoByStuId(stuId);
         if (userInfo != null) {
-            return Result.success(userInfo);
+            return success(userInfo);
         }
         return Result.failure("找不到此用户");
 
@@ -93,7 +98,7 @@ public class UserController {
 
         boolean update = userInfoService.updateAvatar(image, stuId);
         if (update) {
-            return Result.success("头像上传成功!");
+            return success("头像上传成功!");
         } else {
             return Result.failure("头像上传失败");
         }
@@ -121,7 +126,7 @@ public class UserController {
             boolean update = userInfoService.updatePwd(stuId, pwd, newPwd);
             //如果返回true
             if (update) {
-                return Result.success("密码修改成功！");
+                return success("密码修改成功！");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -143,7 +148,7 @@ public class UserController {
             //users.clear(); 测试失败
             //当users不为空，那么返回数据
             if (users != null || !users.isEmpty()) {
-                return Result.success(users);
+                return success(users);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -166,20 +171,24 @@ public class UserController {
 
     })
     public Result login(String password, String stuId) {
+
+
+        //1. 获取subject 用户主体
+        Subject subject = SecurityUtils.getSubject();
+        //2. 封装用户数据Token登陆
+        UsernamePasswordToken token = new UsernamePasswordToken(stuId, password);
+        //3.执行登陆方法
+
         try {
-            boolean login = userInfoService.login(stuId, password);
-            if (login) {
-                loginLogHandler.recording(stuId, Constants.LOGIN_SUCCESS, "登陆成功");
-                return Result.success("登陆成功");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Result.failure(e.getMessage());
+            subject.login(token);
+            return Result.success("登陆成功");
+        } catch (UnknownAccountException e) {
+            //登陆失败：用户名不存在
+            return Result.failure("用户名不存在");
+        } catch (IncorrectCredentialsException e) {
+            //登陆失败：密码错误
+            return Result.failure("密码错误");
         }
-        loginLogHandler.recording(stuId, Constants.LOGIN_FAIL, "登陆失败");
-        return Result.failure("用户账号或密码错误！");
 
     }
-
-
 }

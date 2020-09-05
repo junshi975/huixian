@@ -3,6 +3,8 @@ package com.huixian.system.service;
 import com.huixian.common.entiry.UserInfo;
 import com.huixian.common.exception.FileException;
 import org.apache.catalina.User;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -27,13 +29,6 @@ public interface UserInfoService {
      * @return 成功返回用户信息，失败返回null
      */
     UserInfo findUserInfoByStuId(String stuId) throws Exception;
-    /**
-     * 登陆系统
-     * @param stuId    用户学号号
-     * @param password 密码
-     * @return 登陆成功返回true，登陆失败返回false
-     */
-    boolean login(String stuId, String password) throws Exception;
 
 
     /**

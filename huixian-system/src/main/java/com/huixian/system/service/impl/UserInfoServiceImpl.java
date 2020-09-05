@@ -2,10 +2,17 @@ package com.huixian.system.service.impl;
 
 import com.huixian.common.config.HuiXianConfig;
 import com.huixian.common.entiry.UserInfo;
+import com.huixian.common.enums.ResultCode;
 import com.huixian.common.exception.FileException;
 import com.huixian.common.utils.file.FileUploadUtils;
 import com.huixian.system.mapper.UserInfoMapper;
 import com.huixian.system.service.UserInfoService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,16 +40,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         return userInfoMapper.findUserByStuId(stuId);
     }
 
-    @Override
-    public boolean login(String stuId, String password) throws Exception {
 
-        if (userInfoMapper.findUserByStuIdAndPassWord(stuId, password) == null) {
-            return false;
-
-        } else {
-            return true;
-        }
-    }
 
     @Override
     public boolean updatePwd(String stuId, String pwd, String newPwd) throws Exception {

@@ -62,9 +62,9 @@
 - admin/admin
 - 欢迎各位小伙伴来体验。
 
-演示地址：http://www.codewhite.cn/huixian/
+演示地址：https://codewhite.cn/huixian/
 
-API文档：http://www.codewhite.cn/huixian/doc.html
+API文档：  https://codewhite.cn/api/doc.html
 
 ## 功能模块
 

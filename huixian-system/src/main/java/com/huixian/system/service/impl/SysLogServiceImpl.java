@@ -50,8 +50,13 @@ public class SysLogServiceImpl implements SysLogService {
     }
 
     @Override
-    public boolean cleanSysLog() throws Exception {
-        int i = sysLogMapper.cleanSysLog();
-        return i > 0;
+    public boolean saveLogs(List<SysLog> sysLogs) throws Exception {
+        int row = sysLogMapper.insertLogs(sysLogs);
+        return row != 0;
+    }
+
+    @Override
+    public void cleanSysLog() throws Exception {
+      sysLogMapper.cleanSysLog();
     }
 }

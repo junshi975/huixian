@@ -172,7 +172,6 @@ public class FileUploadUtils {
             if (!file.exists()) {
                 file.mkdir();
             }
-            String originalFilename = fileResources.getOriginalFilename();
 
             // 设置文件名：数字加后缀
             String filename = FileUtils.FILENAME_MATH_HAVE_POINT + FileUploadUtils.getExtension(fileResources);
