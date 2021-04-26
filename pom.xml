@@ -57,7 +57,7 @@
         <swagger.version>2.9.2</swagger.version>
         <!--jsr303参数校验版本-->
         <jsr303.version>6.1.5.Final</jsr303.version>
-        <commons.io.version>2.5</commons.io.version>
+        <commons.io.version>2.7</commons.io.version>
         <commons.fileupload.version>1.3.3</commons.fileupload.version>
         <bitwalker.version>1.19</bitwalker.version>
         <!--Shiro安全框架-->
