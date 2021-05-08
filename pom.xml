@@ -61,7 +61,7 @@
         <commons.fileupload.version>1.3.3</commons.fileupload.version>
         <bitwalker.version>1.19</bitwalker.version>
         <!--Shiro安全框架-->
-        <shiro.version>1.4.2</shiro.version>
+        <shiro.version>1.6.0</shiro.version>
         <jwt.version>0.9.0</jwt.version>
         <oshi.version>3.9.1</oshi.version>
     </properties>
